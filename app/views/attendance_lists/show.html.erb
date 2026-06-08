@@ -73,6 +73,16 @@
         </div>
       </div>
 
+      <div class="alert alert-info" role="alert">
+        <% if @attendance_list.responses_retention_expires_at.present? %>
+          Responses are available for download until
+          <strong><%= l(@attendance_list.local_time(@attendance_list.responses_retention_expires_at), format: :long) %></strong>
+          (<%= @attendance_list.time_zone %>). After that, they are automatically deleted.
+        <% else %>
+          Set an end date to enable automatic deletion of submitted responses.
+        <% end %>
+      </div>
+
       <div class="d-flex flex-wrap gap-2">
         <% if @attendance_list.open? %>
           <%= button_to "Close list", close_attendance_list_path(@attendance_list), method: :patch, class: "btn btn-warning" %>

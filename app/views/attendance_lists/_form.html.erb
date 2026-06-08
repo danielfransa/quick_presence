@@ -43,7 +43,8 @@
 
         <div class="col-md-6">
           <%= form.label :ends_at_local, "Ends at", class: "form-label" %>
-          <%= form.datetime_field :ends_at_local, value: attendance_list.ends_at_local, class: "form-control" %>
+          <%= form.datetime_field :ends_at_local, value: attendance_list.ends_at_local, required: true, class: "form-control" %>
+          <div class="form-text">Required so responses can be deleted 48 hours later.</div>
         </div>
       </div>
 

@@ -75,6 +75,17 @@ class AttendanceListsControllerTest < ActionDispatch::IntegrationTest
     assert_includes response.body, "Timestamp,Name,Student code"
   end
 
+  test "purges expired responses before csv export" do
+    attendance_lists(:open_list).update_columns(ends_at: 49.hours.ago)
+
+    assert_difference -> { AttendanceResponse.count }, -1 do
+      get export_attendance_list_url(attendance_lists(:open_list))
+    end
+
+    assert_response :success
+    assert_equal "Timestamp,Name,Student code\n", response.body
+  end
+
   test "exports QR code as pdf" do
     get qr_code_pdf_attendance_list_url(attendance_lists(:open_list))
 

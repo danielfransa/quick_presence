@@ -2,7 +2,10 @@ require "test_helper"
 
 class AttendanceListTest < ActiveSupport::TestCase
   test "generates a public token on create" do
-    attendance_list = users(:organizer).attendance_lists.create!(title: "Algorithms")
+    attendance_list = users(:organizer).attendance_lists.create!(
+      title: "Algorithms",
+      ends_at: 1.hour.from_now
+    )
 
     assert attendance_list.public_token.present?
   end
@@ -42,6 +45,34 @@ class AttendanceListTest < ActiveSupport::TestCase
 
   test "knows when it has expired" do
     assert attendance_lists(:closed_list).expired?
+  end
+
+  test "requires an end date for response retention" do
+    attendance_list = users(:organizer).attendance_lists.new(title: "No End Date")
+
+    assert_not attendance_list.valid?
+    assert_includes attendance_list.errors[:ends_at], "can't be blank"
+  end
+
+  test "calculates response retention expiration" do
+    attendance_list = attendance_lists(:closed_list)
+
+    assert_equal attendance_list.ends_at + 48.hours, attendance_list.responses_retention_expires_at
+  end
+
+  test "purges responses after retention expires" do
+    attendance_list = attendance_lists(:open_list)
+    response = attendance_responses(:first_response)
+
+    attendance_list.update_columns(ends_at: 49.hours.ago)
+
+    assert_difference -> { AttendanceResponse.count }, -1 do
+      assert_difference -> { AttendanceAnswer.count }, -2 do
+        assert_equal 1, attendance_list.purge_expired_responses!
+      end
+    end
+
+    assert_not AttendanceResponse.exists?(response.id)
   end
 
   test "requires end date to be after start date" do

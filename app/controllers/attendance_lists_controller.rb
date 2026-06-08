@@ -48,12 +48,16 @@ class AttendanceListsController < ApplicationController
   end
 
   def responses
+    @attendance_list.purge_expired_responses!
+
     @responses = @attendance_list.attendance_responses
       .includes(attendance_answers: :attendance_field)
       .order(submitted_at: :desc)
   end
 
   def export
+    @attendance_list.purge_expired_responses!
+
     fields = @attendance_list.attendance_fields.ordered
     responses = @attendance_list.attendance_responses
       .includes(attendance_answers: :attendance_field)

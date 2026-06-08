@@ -1,4 +1,6 @@
 class AttendanceList < ApplicationRecord
+  RESPONSES_RETENTION_PERIOD = 48.hours
+
   belongs_to :user
 
   has_many :attendance_fields, -> { ordered }, dependent: :destroy, inverse_of: :attendance_list
@@ -12,11 +14,16 @@ class AttendanceList < ApplicationRecord
   before_validation :generate_public_token, on: :create
 
   validates :title, presence: true
+  validates :ends_at, presence: true
   validates :time_zone, presence: true
   validates :public_token, presence: true, uniqueness: true
   validate :time_zone_must_be_supported
   validate :maximum_of_five_fields
   validate :ends_at_after_starts_at
+
+  scope :responses_retention_expired, lambda {
+    where.not(ends_at: nil).where(ends_at: ..RESPONSES_RETENTION_PERIOD.ago)
+  }
 
   def starts_at_local
     format_local_datetime(starts_at)
@@ -61,6 +68,22 @@ class AttendanceList < ApplicationRecord
 
   def expired?
     active? && ends_at.present? && Time.current > ends_at
+  end
+
+  def responses_retention_expires_at
+    return if ends_at.blank?
+
+    ends_at + RESPONSES_RETENTION_PERIOD
+  end
+
+  def responses_retention_expired?
+    responses_retention_expires_at.present? && Time.current >= responses_retention_expires_at
+  end
+
+  def purge_expired_responses!
+    return 0 unless responses_retention_expired?
+
+    attendance_responses.destroy_all.size
   end
 
   private
