@@ -1,0 +1,13 @@
+student_name:
+  attendance_list: open_list
+  label: Name
+  field_type: text
+  required: true
+  position: 1
+
+student_code:
+  attendance_list: open_list
+  label: Student code
+  field_type: text
+  required: false
+  position: 2

@@ -43,7 +43,8 @@ Planned MVP features:
 - Devise
 - rqrcode
 - Tailwind CSS
-- Ruby CSV
+- Bootstrap
+- csv
 - I18n
 
 ## Internationalization

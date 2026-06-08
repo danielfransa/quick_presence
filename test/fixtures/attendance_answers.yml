@@ -1,0 +1,9 @@
+name_answer:
+  attendance_response: first_response
+  attendance_field: student_name
+  value: Ada Lovelace
+
+code_answer:
+  attendance_response: first_response
+  attendance_field: student_code
+  value: A123

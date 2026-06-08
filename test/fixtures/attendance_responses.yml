@@ -1,0 +1,5 @@
+first_response:
+  attendance_list: open_list
+  submitted_at: <%= 10.minutes.ago %>
+  ip_address: 127.0.0.1
+  user_agent: Rails test

@@ -1,0 +1,61 @@
+<section class="row justify-content-center">
+  <div class="col-lg-8">
+    <div class="mb-4">
+      <h1 class="h2 fw-bold mb-1">Account settings</h1>
+      <p class="text-secondary mb-0">Update your email or password.</p>
+    </div>
+
+    <div class="card border-0 shadow-sm mb-4">
+      <div class="card-body p-4">
+        <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+          <%= render "devise/shared/error_messages", resource: resource %>
+
+          <div class="mb-3">
+            <%= f.label :email, class: "form-label" %>
+            <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control" %>
+          </div>
+
+          <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+            <div class="alert alert-info" role="alert">
+              Waiting confirmation for: <%= resource.unconfirmed_email %>
+            </div>
+          <% end %>
+
+          <div class="row g-3">
+            <div class="col-md-6">
+              <%= f.label :password, class: "form-label" %>
+              <%= f.password_field :password, autocomplete: "new-password", class: "form-control" %>
+              <div class="form-text">Leave blank if you do not want to change it.</div>
+            </div>
+
+            <div class="col-md-6">
+              <%= f.label :password_confirmation, class: "form-label" %>
+              <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "form-control" %>
+            </div>
+          </div>
+
+          <div class="mt-3 mb-4">
+            <%= f.label :current_password, class: "form-label" %>
+            <%= f.password_field :current_password, autocomplete: "current-password", class: "form-control" %>
+            <div class="form-text">Required to confirm account changes.</div>
+          </div>
+
+          <%= f.submit "Update account", class: "btn btn-primary" %>
+          <%= link_to "Back", attendance_lists_path, class: "btn btn-outline-secondary" %>
+        <% end %>
+      </div>
+    </div>
+
+    <div class="card border-danger shadow-sm">
+      <div class="card-body">
+        <h2 class="h5 text-danger">Delete account</h2>
+        <p class="text-secondary">This permanently removes your account and attendance lists.</p>
+        <%= button_to "Delete my account",
+          registration_path(resource_name),
+          data: { turbo_confirm: "Are you sure?" },
+          method: :delete,
+          class: "btn btn-outline-danger" %>
+      </div>
+    </div>
+  </div>
+</section>

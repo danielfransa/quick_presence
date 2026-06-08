@@ -1,0 +1,39 @@
+<section class="row justify-content-center">
+  <div class="col-md-8 col-lg-6 col-xl-5">
+    <div class="card border-0 shadow-sm">
+      <div class="card-body p-4 p-md-5">
+        <span class="badge text-bg-primary mb-3">QuickPresence</span>
+        <h1 class="h2 fw-bold">Create your account</h1>
+        <p class="text-secondary">Start creating attendance lists with public links and QR codes.</p>
+
+        <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { class: "mt-4" }) do |f| %>
+          <%= render "devise/shared/error_messages", resource: resource %>
+
+          <div class="mb-3">
+            <%= f.label :email, class: "form-label" %>
+            <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control", placeholder: "you@example.com" %>
+          </div>
+
+          <div class="mb-3">
+            <div class="d-flex justify-content-between gap-2">
+              <%= f.label :password, class: "form-label" %>
+              <% if @minimum_password_length %>
+                <span class="form-text mt-0"><%= @minimum_password_length %> characters minimum</span>
+              <% end %>
+            </div>
+            <%= f.password_field :password, autocomplete: "new-password", class: "form-control" %>
+          </div>
+
+          <div class="mb-4">
+            <%= f.label :password_confirmation, class: "form-label" %>
+            <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "form-control" %>
+          </div>
+
+          <%= f.submit "Create account", class: "btn btn-primary w-100" %>
+        <% end %>
+
+        <%= render "devise/shared/links" %>
+      </div>
+    </div>
+  </div>
+</section>

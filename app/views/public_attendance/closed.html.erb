@@ -1,0 +1,25 @@
+<section class="row justify-content-center">
+  <div class="col-lg-6">
+    <div class="p-5 bg-white border rounded-3 text-center shadow-sm">
+      <% if @attendance_list.not_started? %>
+        <span class="badge text-bg-info mb-3">Not open yet</span>
+        <h1 class="h2 fw-bold">This attendance list is not open yet</h1>
+        <p class="text-secondary mb-0">
+          Responses will be accepted starting at <%= l(@attendance_list.local_time(@attendance_list.starts_at), format: :long) %>
+          (<%= @attendance_list.time_zone %>).
+        </p>
+      <% elsif @attendance_list.expired? %>
+        <span class="badge text-bg-secondary mb-3">Expired</span>
+        <h1 class="h2 fw-bold">This attendance list has expired</h1>
+        <p class="text-secondary mb-0">
+          Responses were accepted until <%= l(@attendance_list.local_time(@attendance_list.ends_at), format: :long) %>
+          (<%= @attendance_list.time_zone %>).
+        </p>
+      <% else %>
+        <span class="badge text-bg-secondary mb-3">Closed</span>
+        <h1 class="h2 fw-bold">This attendance list is closed</h1>
+        <p class="text-secondary mb-0">Responses are no longer being accepted.</p>
+      <% end %>
+    </div>
+  </div>
+</section>

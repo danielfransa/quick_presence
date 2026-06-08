@@ -1,0 +1,19 @@
+open_list:
+  user: organizer
+  title: Database Class
+  description: Attendance for the database class.
+  public_token: open-token
+  starts_at: <%= 1.hour.ago %>
+  ends_at: <%= 1.hour.from_now %>
+  time_zone: America/Sao_Paulo
+  active: true
+
+closed_list:
+  user: teacher
+  title: Closed Workshop
+  description: Attendance for a closed workshop.
+  public_token: closed-token
+  starts_at: <%= 2.hours.ago %>
+  ends_at: <%= 1.hour.ago %>
+  time_zone: America/Sao_Paulo
+  active: true

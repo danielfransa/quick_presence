@@ -1,0 +1,2 @@
+module PublicAttendanceHelper
+end

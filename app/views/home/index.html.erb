@@ -1,0 +1,38 @@
+<section class="row justify-content-center">
+  <div class="col-lg-9 col-xl-8">
+    <div class="p-4 p-md-5 bg-white border rounded-3 shadow-sm">
+      <span class="badge text-bg-primary mb-3">Open source attendance</span>
+      <h1 class="display-5 fw-bold text-body-emphasis">Create attendance lists in minutes.</h1>
+      <p class="lead text-secondary mt-3">
+        QuickPresence helps organizers create temporary attendance forms with custom fields,
+        public links, QR codes, and CSV export.
+      </p>
+
+      <div class="d-flex flex-wrap gap-2 mt-4">
+        <%= link_to "Create an account", new_user_registration_path, class: "btn btn-primary btn-lg" %>
+        <%= link_to "Sign in", new_user_session_path, class: "btn btn-outline-secondary btn-lg" %>
+      </div>
+    </div>
+
+    <div class="row g-3 mt-3">
+      <div class="col-md-4">
+        <div class="h-100 p-3 bg-white border rounded-3">
+          <h2 class="h6 fw-bold">Custom fields</h2>
+          <p class="mb-0 text-secondary">Collect up to 5 custom answers per list.</p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="h-100 p-3 bg-white border rounded-3">
+          <h2 class="h6 fw-bold">QR sharing</h2>
+          <p class="mb-0 text-secondary">Share a public link or QR code with participants.</p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="h-100 p-3 bg-white border rounded-3">
+          <h2 class="h6 fw-bold">CSV export</h2>
+          <p class="mb-0 text-secondary">Download submitted responses with timestamps.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
