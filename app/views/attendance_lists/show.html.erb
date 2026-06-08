@@ -15,6 +15,7 @@
     <div class="d-flex flex-wrap gap-2 align-self-lg-start">
       <%= link_to "Edit", edit_attendance_list_path(@attendance_list), class: "btn btn-outline-secondary" %>
       <%= link_to "Responses", responses_attendance_list_path(@attendance_list), class: "btn btn-outline-primary" %>
+      <%= link_to "Print QR PDF", qr_code_pdf_attendance_list_path(@attendance_list), class: "btn btn-outline-primary", target: "_blank", rel: "noopener" %>
       <%= link_to "Export CSV", export_attendance_list_path(@attendance_list), class: "btn btn-primary" %>
     </div>
   </div>
@@ -90,6 +91,7 @@
             <%= qr_code_svg(public_attendance_url(@attendance_list.public_token)) %>
           </div>
           <p class="small text-secondary mt-3 mb-0">Participants can scan this code to submit attendance.</p>
+          <%= link_to "Print QR PDF", qr_code_pdf_attendance_list_path(@attendance_list), class: "btn btn-outline-primary btn-sm mt-3", target: "_blank", rel: "noopener" %>
         </div>
       </div>
     </div>

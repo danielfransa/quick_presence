@@ -42,6 +42,7 @@ Planned MVP features:
 - Stimulus
 - Devise
 - rqrcode
+- Prawn
 - Tailwind CSS
 - Bootstrap
 - csv

@@ -1,8 +1,10 @@
 require "csv"
+require "prawn"
+require "prawn-svg"
 
 class AttendanceListsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_attendance_list, only: %i[show edit update destroy responses export close]
+  before_action :set_attendance_list, only: %i[show edit update destroy responses export qr_code_pdf close]
 
   def index
     @attendance_lists = current_user.attendance_lists.order(created_at: :desc)
@@ -70,6 +72,18 @@ class AttendanceListsController < ApplicationController
     send_data csv_data,
       filename: "attendance-list-#{@attendance_list.id}.csv",
       type: "text/csv"
+  end
+
+  def qr_code_pdf
+    pdf = AttendanceListQrCodePdf.new(
+      @attendance_list,
+      public_attendance_url(@attendance_list.public_token)
+    )
+
+    send_data pdf.render,
+      filename: "attendance-list-#{@attendance_list.id}-qr-code.pdf",
+      type: "application/pdf",
+      disposition: "inline"
   end
 
   def close

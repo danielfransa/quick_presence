@@ -72,3 +72,6 @@ gem "tailwindcss-rails", "~> 4.4"
 gem "foreman", "~> 0.90.0", group: :development
 
 gem "csv", "~> 3.3"
+
+gem "prawn", "~> 2.4"
+gem "prawn-svg", "~> 0.40.2"

@@ -74,4 +74,18 @@ class AttendanceListsControllerTest < ActionDispatch::IntegrationTest
     assert_equal "text/csv", response.media_type
     assert_includes response.body, "Timestamp,Name,Student code"
   end
+
+  test "exports QR code as pdf" do
+    get qr_code_pdf_attendance_list_url(attendance_lists(:open_list))
+
+    assert_response :success
+    assert_equal "application/pdf", response.media_type
+    assert response.body.start_with?("%PDF")
+  end
+
+  test "does not export another user's QR code pdf" do
+    get qr_code_pdf_attendance_list_url(attendance_lists(:closed_list))
+
+    assert_response :not_found
+  end
 end

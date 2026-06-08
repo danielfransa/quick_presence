@@ -13,6 +13,7 @@ Rails.application.routes.draw do
     member do
       get :responses
       get :export
+      get :qr_code_pdf
       patch :close
     end
   end
