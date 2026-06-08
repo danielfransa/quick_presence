@@ -14,12 +14,14 @@ QuickPresence helps an authenticated organizer:
 - generate a public attendance form link;
 - generate a QR code for fast access;
 - review submitted responses;
-- export attendance data as CSV.
+- export attendance data as CSV;
 - automatically delete submitted responses 48 hours after the list's end time.
 
 Participants can open the public link or scan the QR code, fill in the fields configured by the organizer, and submit their attendance while the list is open.
 
 Submitted responses are retained for download for 48 hours after the attendance list's end time. After that window, responses and answers are automatically deleted from the system.
+
+Organizer accounts use usernames instead of email addresses. Password recovery and password changes are not available in this version, so organizers should choose a strong password and store it safely.
 
 ## Project Status
 
@@ -27,14 +29,14 @@ This repository is at the beginning of development. The first milestone is a Rai
 
 Planned MVP features:
 
-- user registration and authentication;
+- username-only user registration and authentication;
 - attendance list CRUD;
 - custom attendance fields;
 - public attendance form by token;
 - QR code generation;
 - validity control by date and time;
 - response storage with timestamps;
-- CSV export.
+- CSV export;
 - automatic response deletion after the 48-hour download window.
 
 ## Tech Stack

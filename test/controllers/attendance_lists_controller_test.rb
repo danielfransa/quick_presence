@@ -9,6 +9,9 @@ class AttendanceListsControllerTest < ActionDispatch::IntegrationTest
     get attendance_lists_url
 
     assert_response :success
+    assert_includes response.body, "Attendance Lists"
+    assert_includes response.body, "Log out"
+    assert_not_includes response.body, "collapse navbar-collapse"
     assert_includes response.body, attendance_lists(:open_list).title
   end
 

@@ -29,15 +29,11 @@
       <div class="container">
         <%= link_to "QuickPresence", user_signed_in? ? attendance_lists_path : root_path, class: "navbar-brand fw-bold" %>
 
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavigation" aria-controls="mainNavigation" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-
-        <div class="collapse navbar-collapse" id="mainNavigation">
-          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <div class="d-flex flex-wrap align-items-center gap-3 ms-auto">
+          <ul class="navbar-nav flex-row flex-wrap gap-2">
             <% if user_signed_in? %>
               <li class="nav-item">
-                <%= link_to "Lists", attendance_lists_path, class: "nav-link" %>
+                <%= link_to "Attendance Lists", attendance_lists_path, class: "nav-link" %>
               </li>
               <li class="nav-item">
                 <%= link_to "New list", new_attendance_list_path, class: "nav-link" %>
@@ -45,10 +41,10 @@
             <% end %>
           </ul>
 
-          <div class="d-flex align-items-lg-center gap-2">
+          <div class="d-flex flex-wrap align-items-center gap-2">
             <% if user_signed_in? %>
-              <span class="navbar-text small text-muted"><%= current_user.email %></span>
-              <%= button_to "Sign out", destroy_user_session_path, method: :delete, class: "btn btn-outline-secondary btn-sm" %>
+              <span class="navbar-text small text-muted"><%= current_user.username %></span>
+              <%= button_to "Log out", destroy_user_session_path, method: :delete, class: "btn btn-outline-secondary btn-sm" %>
             <% else %>
               <%= link_to "Sign in", new_user_session_path, class: "btn btn-outline-secondary btn-sm" %>
               <%= link_to "Sign up", new_user_registration_path, class: "btn btn-primary btn-sm" %>
