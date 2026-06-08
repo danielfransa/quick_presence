@@ -28,6 +28,8 @@ class AttendanceListQrCodePdf
   end
 
   def draw_qr_code(pdf)
+    pdf.move_down 28
+
     qr_svg = RQRCode::QRCode.new(public_url).as_svg(
       color: "000",
       shape_rendering: "crispEdges",
@@ -38,10 +40,9 @@ class AttendanceListQrCodePdf
 
     qr_size = 300
     x_position = (pdf.bounds.width - qr_size) / 2
-    y_position = (pdf.bounds.height + qr_size) / 2 - 80
 
     pdf.svg qr_svg,
-      at: [ x_position, y_position ],
+      at: [ x_position, pdf.cursor ],
       width: qr_size,
       height: qr_size,
       enable_web_requests: false
