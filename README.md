@@ -42,6 +42,7 @@ Planned MVP features:
 - Stimulus
 - Devise
 - rqrcode
+- Tailwind CSS
 - Ruby CSV
 - I18n
 
@@ -68,7 +69,7 @@ bin/rails db:prepare
 Run the application:
 
 ```bash
-bin/rails server
+bin/dev
 ```
 
 Run tests:

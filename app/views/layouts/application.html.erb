@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title><%= content_for(:title) || "Quick Presence" %></title>
+    <title><%= content_for(:title) || "QuickPresence" %></title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="application-name" content="Quick Presence">
+    <meta name="application-name" content="QuickPresence">
     <meta name="mobile-web-app-capable" content="yes">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
@@ -24,6 +24,16 @@
   </head>
 
   <body>
-    <%= yield %>
+    <main class="container mx-auto mt-28 px-5">
+      <% if notice.present? %>
+        <p class="mb-4 rounded-md border border-emerald-200 bg-emerald-50 px-4 py-3 text-sm text-emerald-900"><%= notice %></p>
+      <% end %>
+
+      <% if alert.present? %>
+        <p class="mb-4 rounded-md border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-900"><%= alert %></p>
+      <% end %>
+
+      <%= yield %>
+    </main>
   </body>
 </html>
