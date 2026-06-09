@@ -30,6 +30,9 @@ class AttendanceListsControllerTest < ActionDispatch::IntegrationTest
 
     assert_response :success
     assert_includes response.body, "Public link"
+    assert_includes response.body, "Copy link"
+    assert_includes response.body, "data-copy-public-link"
+    assert_includes response.body, "data-public-link-status"
   end
 
   test "does not show another user's attendance list" do

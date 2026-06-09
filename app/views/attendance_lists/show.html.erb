@@ -47,9 +47,13 @@
         </div>
         <div class="card-body">
           <label class="form-label">Public link</label>
-          <div class="input-group">
-            <input class="form-control" readonly value="<%= public_attendance_url(@attendance_list.public_token) %>">
-            <%= link_to "Open", public_attendance_path(@attendance_list.public_token), class: "btn btn-outline-secondary", target: "_blank", rel: "noopener" %>
+          <div data-public-link>
+            <div class="input-group">
+              <input class="form-control" readonly value="<%= public_attendance_url(@attendance_list.public_token) %>" data-public-link-source>
+              <button type="button" class="btn btn-primary" data-copy-public-link>Copy link</button>
+              <%= link_to "Open", public_attendance_path(@attendance_list.public_token), class: "btn btn-outline-secondary", target: "_blank", rel: "noopener" %>
+            </div>
+            <div class="small mt-2" role="status" aria-live="polite" data-public-link-status></div>
           </div>
         </div>
       </div>
