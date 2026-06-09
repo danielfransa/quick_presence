@@ -16,7 +16,8 @@
       <%= link_to "Edit", edit_attendance_list_path(@attendance_list), class: "btn btn-outline-secondary" %>
       <%= link_to "Responses", responses_attendance_list_path(@attendance_list), class: "btn btn-outline-primary" %>
       <%= link_to "Print QR PDF", qr_code_pdf_attendance_list_path(@attendance_list), class: "btn btn-outline-primary", target: "_blank", rel: "noopener" %>
-      <%= link_to "Export CSV", export_attendance_list_path(@attendance_list), class: "btn btn-primary" %>
+      <%= link_to "Export CSV", export_attendance_list_path(@attendance_list, format: :csv), class: "btn btn-outline-primary" %>
+      <%= link_to "Export Excel", export_attendance_list_path(@attendance_list, format: :xlsx), class: "btn btn-primary" %>
     </div>
   </div>
 

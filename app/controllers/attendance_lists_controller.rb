@@ -62,20 +62,26 @@ class AttendanceListsController < ApplicationController
     responses = @attendance_list.attendance_responses
       .includes(attendance_answers: :attendance_field)
       .order(:submitted_at)
+    rows = [ [ "Timestamp" ] + fields.map(&:label) ]
 
-    csv_data = CSV.generate(headers: true) do |csv|
-      csv << [ "Timestamp" ] + fields.map(&:label)
-
-      responses.each do |response|
-        answers_by_field_id = response.attendance_answers.index_by(&:attendance_field_id)
-        csv << [ response.submitted_at.strftime("%Y-%m-%d %H:%M:%S") ] +
-          fields.map { |field| answers_by_field_id[field.id]&.value }
-      end
+    responses.each do |response|
+      answers_by_field_id = response.attendance_answers.index_by(&:attendance_field_id)
+      rows << [ response.submitted_at.strftime("%Y-%m-%d %H:%M:%S") ] +
+        fields.map { |field| answers_by_field_id[field.id]&.value }
     end
 
-    send_data csv_data,
-      filename: "attendance-list-#{@attendance_list.id}.csv",
-      type: "text/csv"
+    respond_to do |format|
+      format.csv do
+        send_data CSV.generate { |csv| rows.each { |row| csv << row } },
+          filename: "attendance-list-#{@attendance_list.id}.csv",
+          type: "text/csv"
+      end
+      format.xlsx do
+        send_data AttendanceListXlsx.new(rows).render,
+          filename: "attendance-list-#{@attendance_list.id}.xlsx",
+          type: AttendanceListXlsx::CONTENT_TYPE
+      end
+    end
   end
 
   def qr_code_pdf

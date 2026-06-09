@@ -11,8 +11,9 @@
       <% end %>
     </div>
 
-    <div class="d-flex gap-2 align-self-md-start">
-      <%= link_to "Export CSV", export_attendance_list_path(@attendance_list), class: "btn btn-primary" %>
+    <div class="d-flex flex-wrap gap-2 align-self-md-start">
+      <%= link_to "Export CSV", export_attendance_list_path(@attendance_list, format: :csv), class: "btn btn-outline-primary" %>
+      <%= link_to "Export Excel", export_attendance_list_path(@attendance_list, format: :xlsx), class: "btn btn-primary" %>
       <%= link_to "Back", @attendance_list, class: "btn btn-outline-secondary" %>
     </div>
   </div>

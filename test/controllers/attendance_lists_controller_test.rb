@@ -71,18 +71,34 @@ class AttendanceListsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "exports responses as csv" do
-    get export_attendance_list_url(attendance_lists(:open_list))
+    get export_attendance_list_url(attendance_lists(:open_list), format: :csv)
 
     assert_response :success
     assert_equal "text/csv", response.media_type
     assert_includes response.body, "Timestamp,Name,Student code"
   end
 
+  test "exports responses as excel workbook" do
+    get export_attendance_list_url(attendance_lists(:open_list), format: :xlsx)
+
+    assert_response :success
+    assert_equal AttendanceListXlsx::CONTENT_TYPE, response.media_type
+    assert response.body.start_with?("PK")
+
+    Zip::File.open_buffer(response.body) do |workbook|
+      worksheet = workbook.read("xl/worksheets/sheet1.xml")
+
+      assert_includes worksheet, "Timestamp"
+      assert_includes worksheet, "Ada Lovelace"
+      assert_includes worksheet, "A123"
+    end
+  end
+
   test "purges expired responses before csv export" do
     attendance_lists(:open_list).update_columns(ends_at: 49.hours.ago)
 
     assert_difference -> { AttendanceResponse.count }, -1 do
-      get export_attendance_list_url(attendance_lists(:open_list))
+      get export_attendance_list_url(attendance_lists(:open_list), format: :csv)
     end
 
     assert_response :success
