@@ -1,4 +1,5 @@
 class ApplicationController < ActionController::Base
+  around_action :switch_locale
   before_action :configure_permitted_parameters, if: :devise_controller?
 
   # Only allow modern browsers supporting webp images, web push, badges, import maps, CSS nesting, and CSS :has.
@@ -9,11 +10,31 @@ class ApplicationController < ActionController::Base
 
   protected
 
+  def switch_locale(&action)
+    I18n.with_locale(preferred_locale, &action)
+  end
+
   def configure_permitted_parameters
     devise_parameter_sanitizer.permit(:sign_up, keys: [ :username, :inactivity_terms_accepted ])
   end
 
   def after_sign_in_path_for(_resource)
     attendance_lists_path
+  end
+
+  private
+
+  def preferred_locale
+    accepts_portuguese_brazil? ? :"pt-BR" : I18n.default_locale
+  end
+
+  def accepts_portuguese_brazil?
+    request.headers["Accept-Language"].to_s.split(",").any? do |language_range|
+      language, *parameters = language_range.strip.split(";")
+      quality_parameter = parameters.find { |parameter| parameter.strip.start_with?("q=") }
+      quality = quality_parameter ? quality_parameter.split("=", 2).last.to_f : 1.0
+
+      language.casecmp("pt-BR").zero? && quality.positive?
+    end
   end
 end

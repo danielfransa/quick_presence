@@ -1,0 +1,34 @@
+"pt-BR":
+  devise:
+    failure:
+      already_authenticated: "Você já está autenticado."
+      inactive: "Sua conta ainda não está ativa."
+      invalid: "%{authentication_keys} ou senha inválidos."
+      locked: "Sua conta está bloqueada."
+      last_attempt: "Você tem mais uma tentativa antes que sua conta seja bloqueada."
+      not_found_in_database: "%{authentication_keys} ou senha inválidos."
+      timeout: "Sua sessão expirou. Entre novamente para continuar."
+      unauthenticated: "Você precisa entrar ou criar uma conta antes de continuar."
+    omniauth_callbacks:
+      failure: "Não foi possível autenticar com %{kind} porque \"%{reason}\"."
+      success: "Autenticado com sucesso pela conta %{kind}."
+    registrations:
+      destroyed: "Sua conta foi excluída com sucesso."
+      signed_up: "Bem-vindo! Sua conta foi criada com sucesso."
+      signed_up_but_inactive: "Sua conta foi criada, mas ainda não está ativa."
+      signed_up_but_locked: "Sua conta foi criada, mas está bloqueada."
+      updated: "Sua conta foi atualizada com sucesso."
+    sessions:
+      signed_in: "Login realizado com sucesso."
+      signed_out: "Você saiu com sucesso."
+      already_signed_out: "Você saiu com sucesso."
+  errors:
+    messages:
+      already_confirmed: "já foi confirmado; tente entrar"
+      confirmation_period_expired: "precisa ser confirmado dentro de %{period}; solicite uma nova confirmação"
+      expired: "expirou; solicite um novo"
+      not_found: "não encontrado"
+      not_locked: "não estava bloqueado"
+      not_saved:
+        one: "1 erro impediu que este %{resource} fosse salvo:"
+        other: "%{count} erros impediram que este %{resource} fosse salvo:"

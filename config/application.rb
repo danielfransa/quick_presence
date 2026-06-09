@@ -22,8 +22,9 @@ module QuickPresence
     # in config/environments, which are processed later.
     #
     config.time_zone = "America/Sao_Paulo"
-    config.i18n.available_locales = [ :en ]
+    config.i18n.available_locales = [ :en, :"pt-BR" ]
     config.i18n.default_locale = :en
+    config.i18n.fallbacks = [ :en ]
     # config.eager_load_paths << Rails.root.join("extras")
   end
 end

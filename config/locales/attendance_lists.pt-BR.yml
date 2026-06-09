@@ -1,0 +1,88 @@
+"pt-BR":
+  attendance_lists:
+    notices:
+      created: "Lista de presença criada com sucesso."
+      updated: "Lista de presença atualizada com sucesso."
+      deleted: "Lista de presença excluída com sucesso."
+      closed: "Lista de presença encerrada com sucesso."
+    index:
+      title: "Listas de presença"
+      description: "Gerencie seus formulários temporários de presença."
+      new_list: "Nova lista"
+      table:
+        title: "Título"
+        status: "Status"
+        responses: "Respostas"
+        actions: "Ações"
+      empty:
+        title: "Nenhuma lista de presença"
+        description: "Crie seu primeiro formulário público de presença e compartilhe-o por código QR."
+        action: "Criar sua primeira lista"
+    new:
+      title: "Nova lista de presença"
+      description: "Crie um formulário público e compartilhe-o por link ou código QR."
+    edit:
+      title: "Editar lista de presença"
+      description: "Atualize a disponibilidade e os campos personalizados."
+    form:
+      errors:
+        resource: "lista"
+      details: "Detalhes da lista"
+      title_placeholder: "Aula de banco de dados"
+      description_placeholder: "Instruções breves para os participantes"
+      time_zone_detected: "Fuso horário detectado automaticamente"
+      time_zone_description_html: "As datas e os horários abaixo serão interpretados como %{time_zone}."
+      starts_at: "Início"
+      ends_at: "Término"
+      ends_at_hint: "Obrigatório para que as respostas sejam excluídas 48 horas depois."
+      accept_responses: "Aceitar respostas"
+      custom_fields: "Campos personalizados"
+      custom_fields_description: "Adicione até 5 campos para os participantes. Nomes de campos vazios serão ignorados."
+      timestamp_automatic: "O horário é automático"
+      timestamp_description: "O horário do envio é registrado automaticamente e não conta como um dos 5 campos personalizados."
+      field_label: "Campo %{number}"
+      field_placeholder: "Nome, matrícula, turma..."
+      required: "Obrigatório"
+      submit: "Salvar lista de presença"
+    show:
+      actions:
+        responses: "Respostas"
+        print_qr_pdf: "Imprimir QR em PDF"
+        export_csv: "Exportar CSV"
+        export_excel: "Exportar Excel"
+        close_list: "Encerrar lista"
+      schedule:
+        title: "Período"
+        time_zone: "Fuso horário"
+        starts_at: "Início"
+        ends_at: "Término"
+        immediately: "Imediatamente"
+        no_end_date: "Sem data de término"
+      sharing:
+        title: "Compartilhamento público"
+        public_link: "Link público"
+        copy_link: "Copiar link"
+        copied: "Copiado!"
+        copied_status: "Link público copiado para a área de transferência."
+        copy_blocked: "A cópia foi bloqueada. Pressione Ctrl+C ou Command+C."
+      fields:
+        title: "Campos"
+        required: "Obrigatório"
+        optional: "Opcional"
+        description: "As respostas enviadas também incluem uma coluna de horário. Ela não faz parte do limite de 5 campos personalizados."
+      retention:
+        available_until_html: "As respostas estarão disponíveis para download até <strong>%{date}</strong> (%{time_zone}). Depois disso, serão excluídas automaticamente."
+        no_end_date: "Defina uma data de término para ativar a exclusão automática das respostas enviadas."
+      delete_confirmation: "Excluir esta lista de presença?"
+      qr_code:
+        title: "Código QR"
+        description: "Os participantes podem escanear este código para registrar presença."
+    responses:
+      title: "Respostas"
+      available_until: "Disponíveis até %{date} (%{time_zone})."
+      export_csv: "Exportar CSV"
+      export_excel: "Exportar Excel"
+      timestamp: "Horário"
+      empty:
+        title: "Nenhuma resposta ainda"
+        description: "Compartilhe o link público ou o código QR para começar a registrar presenças."

@@ -1,0 +1,50 @@
+"pt-BR":
+  activerecord:
+    models:
+      attendance_answer: "resposta de presença"
+      attendance_field: "campo de presença"
+      attendance_list: "lista de presença"
+      attendance_response: "registro de presença"
+      user: "usuário"
+    attributes:
+      attendance_answer:
+        value: "Valor"
+      attendance_field:
+        field_type: "Tipo do campo"
+        label: "Rótulo"
+        position: "Posição"
+        required: "Obrigatório"
+      attendance_list:
+        active: "Ativa"
+        attendance_fields: "Campos de presença"
+        description: "Descrição"
+        ends_at: "Término"
+        starts_at: "Início"
+        time_zone: "Fuso horário"
+        title: "Título"
+      attendance_response:
+        submitted_at: "Enviado em"
+      user:
+        inactivity_terms_accepted: "Termos de exclusão por inatividade"
+        password: "Senha"
+        password_confirmation: "Confirmação da senha"
+        remember_me: "Lembrar de mim"
+        username: "Nome de usuário"
+    errors:
+      models:
+        attendance_list:
+          attributes:
+            attendance_fields:
+              too_many: "permite no máximo 5 campos"
+            ends_at:
+              before_start: "deve ser posterior à data e ao horário de início"
+            time_zone:
+              unsupported: "não é compatível"
+        attendance_response:
+          attributes:
+            base:
+              closed: "A lista de presença está fechada"
+        user:
+          attributes:
+            username:
+              invalid_format: "só pode conter letras, números e sublinhados"

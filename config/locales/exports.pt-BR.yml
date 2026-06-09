@@ -1,0 +1,15 @@
+"pt-BR":
+  exports:
+    attendance_list:
+      columns:
+        number: "Número"
+        timestamp: "Horário"
+      timestamp_format: "%d/%m/%Y %H:%M:%S"
+      filenames:
+        csv: "lista-de-presenca-%{id}.csv"
+        xlsx: "lista-de-presenca-%{id}.xlsx"
+        qr_pdf: "lista-de-presenca-%{id}-codigo-qr.pdf"
+      xlsx:
+        sheet_name: "Respostas"
+      qr_pdf:
+        privacy_notice: "Os dados enviados pertencem ao criador da lista de presença e não serão usados fora deste contexto."

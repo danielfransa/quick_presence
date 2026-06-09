@@ -1,0 +1,18 @@
+"pt-BR":
+  home:
+    index:
+      badge: "Controle de presença de código aberto"
+      title: "Crie listas de presença em minutos."
+      description: "O QuickPresence ajuda organizadores a criar formulários temporários de presença com campos personalizados, links públicos, códigos QR e exportação CSV."
+      create_account: "Criar uma conta"
+      sign_in: "Entrar"
+      features:
+        custom_fields:
+          title: "Campos personalizados"
+          description: "Colete até 5 respostas personalizadas por lista."
+        qr_sharing:
+          title: "Compartilhamento por QR"
+          description: "Compartilhe um link público ou código QR com os participantes."
+        csv_export:
+          title: "Exportação CSV"
+          description: "Baixe as respostas enviadas com seus horários."

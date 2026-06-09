@@ -1,0 +1,25 @@
+"pt-BR":
+  public_attendance:
+    notices:
+      closed: "Esta lista de presença está fechada."
+      recorded: "Presença registrada com sucesso."
+    show:
+      badge: "Aberta para respostas"
+      privacy_notice: "As informações enviadas serão usadas apenas nesta lista de presença."
+      errors:
+        one: "1 erro impediu o registro da sua presença."
+        other: "%{count} erros impediram o registro da sua presença."
+      submit: "Registrar presença"
+    closed:
+      not_started:
+        badge: "Ainda não aberta"
+        title: "Esta lista de presença ainda não está aberta"
+        description: "As respostas serão aceitas a partir de %{date} (%{time_zone})."
+      expired:
+        badge: "Expirada"
+        title: "Esta lista de presença expirou"
+        description: "As respostas foram aceitas até %{date} (%{time_zone})."
+      inactive:
+        badge: "Fechada"
+        title: "Esta lista de presença está fechada"
+        description: "As respostas não estão mais sendo aceitas."

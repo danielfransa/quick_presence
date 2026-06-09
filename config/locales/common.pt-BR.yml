@@ -1,0 +1,61 @@
+"pt-BR":
+  app:
+    name: "QuickPresence"
+  common:
+    actions:
+      back: "Voltar"
+      cancel: "Cancelar"
+      close: "Fechar"
+      delete: "Excluir"
+      edit: "Editar"
+      open: "Abrir"
+    status:
+      closed: "Fechada"
+      open: "Aberta"
+    errors:
+      form_not_saved:
+        one: "1 erro impediu que esta %{resource} fosse salva."
+        other: "%{count} erros impediram que esta %{resource} fosse salva."
+  layouts:
+    application:
+      navigation:
+        account_settings: "Configurações da conta"
+        attendance_lists: "Listas de presença"
+        log_out: "Sair"
+        new_list: "Nova lista"
+        sign_in: "Entrar"
+        sign_up: "Criar conta"
+  date:
+    month_names:
+      - null
+      - "janeiro"
+      - "fevereiro"
+      - "março"
+      - "abril"
+      - "maio"
+      - "junho"
+      - "julho"
+      - "agosto"
+      - "setembro"
+      - "outubro"
+      - "novembro"
+      - "dezembro"
+    formats:
+      long: "%d de %B de %Y"
+  time:
+    formats:
+      long: "%d de %B de %Y às %H:%M"
+  errors:
+    messages:
+      accepted: "deve ser aceito"
+      blank: "não pode ficar em branco"
+      confirmation: "não corresponde"
+      empty: "não pode ficar vazio"
+      invalid: "não é válido"
+      taken: "já está em uso"
+      too_long:
+        one: "é muito longo (máximo: 1 caractere)"
+        other: "é muito longo (máximo: %{count} caracteres)"
+      too_short:
+        one: "é muito curto (mínimo: 1 caractere)"
+        other: "é muito curto (mínimo: %{count} caracteres)"

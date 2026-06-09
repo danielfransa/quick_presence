@@ -1,0 +1,44 @@
+"pt-BR":
+  accounts:
+    deleted:
+      title: "Conta excluída"
+      description: "Sua conta e todos os dados relacionados foram excluídos permanentemente."
+      return_home: "Voltar ao início"
+    registrations:
+      new:
+        title: "Crie sua conta"
+        description: "Comece a criar listas de presença com links públicos e códigos QR."
+        password_warning: "A recuperação e a alteração de senha não estão disponíveis nesta versão. Escolha uma senha forte e guarde-a em segurança."
+        username_hint: "Use de 3 a 32 letras, números ou sublinhados."
+        minimum_password_length: "mínimo de %{count} caracteres"
+        inactivity_notice: "Contas que ficarem 120 dias sem login serão excluídas permanentemente, incluindo todas as listas de presença e respostas."
+        inactivity_acceptance: "Entendo e aceito que minha conta e todos os dados relacionados serão excluídos permanentemente se eu não entrar durante 120 dias."
+        submit: "Criar conta"
+      edit:
+        title: "Configurações da conta"
+        description: "Revise sua conta e as opções de exclusão."
+        password_warning: "A recuperação e a alteração de senha não estão disponíveis nesta versão. Guarde sua senha em segurança."
+        delete:
+          title: "Excluir conta"
+          description: "Exclua permanentemente sua conta e todas as listas de presença associadas."
+          button: "Excluir minha conta"
+          modal_title: "Excluir sua conta permanentemente?"
+          warning: "Esta ação não pode ser desfeita. Você perderá permanentemente:"
+          account_item: "Sua conta e suas credenciais de acesso"
+          lists_item: "Todas as listas de presença, incluindo as que ainda estão ativas"
+          responses_item: "Todas as respostas e dados que ainda não foram baixados"
+          confirm: "Sim, excluir tudo"
+    sessions:
+      new:
+        title: "Entrar"
+        description: "Acesse suas listas de presença e as respostas enviadas."
+        submit: "Entrar"
+        password_warning: "A recuperação de senha não está disponível. Guarde sua senha em segurança."
+    shared:
+      username_placeholder: "nome_do_organizador"
+      links:
+        create_account: "Criar uma conta"
+        confirmation_instructions: "Não recebeu as instruções de confirmação?"
+        sign_in: "Entrar"
+        sign_in_with: "Entrar com %{provider}"
+        unlock_instructions: "Não recebeu as instruções de desbloqueio?"
