@@ -61,13 +61,14 @@ class AttendanceListsController < ApplicationController
     fields = @attendance_list.attendance_fields.ordered
     responses = @attendance_list.attendance_responses
       .includes(attendance_answers: :attendance_field)
-      .order(:submitted_at)
-    rows = [ [ "Timestamp" ] + fields.map(&:label) ]
+      .order(:submitted_at, :id)
+    rows = [ [ "Number" ] + fields.map(&:label) + [ "Timestamp" ] ]
 
-    responses.each do |response|
+    responses.each_with_index do |response, index|
       answers_by_field_id = response.attendance_answers.index_by(&:attendance_field_id)
-      rows << [ response.submitted_at.strftime("%Y-%m-%d %H:%M:%S") ] +
-        fields.map { |field| answers_by_field_id[field.id]&.value }
+      rows << [ index + 1 ] +
+        fields.map { |field| answers_by_field_id[field.id]&.value } +
+        [ response.submitted_at.strftime("%Y-%m-%d %H:%M:%S") ]
     end
 
     respond_to do |format|

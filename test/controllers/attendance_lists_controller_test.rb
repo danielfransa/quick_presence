@@ -78,7 +78,30 @@ class AttendanceListsControllerTest < ActionDispatch::IntegrationTest
 
     assert_response :success
     assert_equal "text/csv", response.media_type
-    assert_includes response.body, "Timestamp,Name,Student code"
+    rows = CSV.parse(response.body)
+
+    assert_equal [ "Number", "Name", "Student code", "Timestamp" ], rows.first
+    assert_equal [ "1", "Ada Lovelace", "A123" ], rows.second.first(3)
+    assert_match(/\A\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}\z/, rows.second.last)
+  end
+
+  test "numbers exported responses in submission order" do
+    attendance_list = attendance_lists(:open_list)
+    attendance_response = attendance_list.attendance_responses.create!(
+      submitted_at: 5.minutes.ago,
+      ip_address: "127.0.0.2",
+      user_agent: "Rails test"
+    )
+    attendance_response.attendance_answers.create!(
+      attendance_field: attendance_fields(:student_name),
+      value: "Grace Hopper"
+    )
+
+    get export_attendance_list_url(attendance_list, format: :csv)
+
+    rows = CSV.parse(response.body)
+    assert_equal [ "1", "Ada Lovelace" ], rows.second.first(2)
+    assert_equal [ "2", "Grace Hopper" ], rows.third.first(2)
   end
 
   test "exports responses as excel workbook" do
@@ -91,6 +114,9 @@ class AttendanceListsControllerTest < ActionDispatch::IntegrationTest
     Zip::File.open_buffer(response.body) do |workbook|
       worksheet = workbook.read("xl/worksheets/sheet1.xml")
 
+      assert_operator worksheet.index("Number"), :<, worksheet.index("Name")
+      assert_operator worksheet.index("Student code"), :<, worksheet.index("Timestamp")
+      assert_includes worksheet, ">1<"
       assert_includes worksheet, "Timestamp"
       assert_includes worksheet, "Ada Lovelace"
       assert_includes worksheet, "A123"
@@ -105,7 +131,7 @@ class AttendanceListsControllerTest < ActionDispatch::IntegrationTest
     end
 
     assert_response :success
-    assert_equal "Timestamp,Name,Student code\n", response.body
+    assert_equal "Number,Name,Student code,Timestamp\n", response.body
   end
 
   test "exports QR code as pdf" do
