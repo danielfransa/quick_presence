@@ -33,6 +33,17 @@
             <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "form-control" %>
           </div>
 
+          <div class="alert alert-info" role="alert">
+            Accounts that go 120 days without a login are permanently deleted, including all attendance lists and responses.
+          </div>
+
+          <div class="form-check mb-4">
+            <%= f.check_box :inactivity_terms_accepted, class: "form-check-input" %>
+            <%= f.label :inactivity_terms_accepted, class: "form-check-label" do %>
+              I understand and accept that my account and all related data will be permanently deleted if I do not log in for 120 days.
+            <% end %>
+          </div>
+
           <%= f.submit "Create account", class: "btn btn-primary w-100" %>
         <% end %>
 

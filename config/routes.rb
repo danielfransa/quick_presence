@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
-  devise_for :users
+  devise_for :users, controllers: { registrations: "users/registrations" }
+
+  get "/account-deleted", to: "accounts#deleted", as: :account_deleted
 
   authenticated :user do
     root "attendance_lists#index", as: :authenticated_root

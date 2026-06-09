@@ -14,10 +14,18 @@ development:
     class: PurgeExpiredAttendanceResponsesJob
     schedule: every hour
 
+  delete_inactive_users:
+    class: DeleteInactiveUsersJob
+    schedule: every day at 3am
+
 production:
   purge_expired_attendance_responses:
     class: PurgeExpiredAttendanceResponsesJob
     schedule: every hour
+
+  delete_inactive_users:
+    class: DeleteInactiveUsersJob
+    schedule: every day at 3am
 
   clear_solid_queue_finished_jobs:
     command: "SolidQueue::Job.clear_finished_in_batches(sleep_between_batches: 0.3)"

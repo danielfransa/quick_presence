@@ -6,16 +6,37 @@ class UserTest < ActiveSupport::TestCase
   end
 
   test "requires a valid username" do
-    user = User.new(username: "bad name", password: "password123", password_confirmation: "password123")
+    user = User.new(
+      username: "bad name",
+      password: "password123",
+      password_confirmation: "password123",
+      inactivity_terms_accepted: "1"
+    )
 
     assert_not user.valid?
     assert_includes user.errors[:username], "can only contain letters, numbers, and underscores"
   end
 
   test "normalizes username before validation" do
-    user = User.new(username: " Organizer_New ", password: "password123", password_confirmation: "password123")
+    user = User.new(
+      username: " Organizer_New ",
+      password: "password123",
+      password_confirmation: "password123",
+      inactivity_terms_accepted: "1"
+    )
 
     assert user.valid?
     assert_equal "organizer_new", user.username
+  end
+
+  test "requires acceptance of the inactivity deletion term" do
+    user = User.new(
+      username: "new_user",
+      password: "password123",
+      password_confirmation: "password123"
+    )
+
+    assert_not user.valid?
+    assert_includes user.errors[:inactivity_terms_accepted], "must be accepted"
   end
 end

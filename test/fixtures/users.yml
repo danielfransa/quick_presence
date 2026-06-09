@@ -1,7 +1,11 @@
 organizer:
   username: organizer
   encrypted_password: <%= Devise::Encryptor.digest(User, "password123") %>
+  inactivity_terms_accepted_at: <%= Time.current %>
+  last_login_at: <%= Time.current %>
 
 teacher:
   username: teacher
   encrypted_password: <%= Devise::Encryptor.digest(User, "password123") %>
+  inactivity_terms_accepted_at: <%= Time.current %>
+  last_login_at: <%= Time.current %>

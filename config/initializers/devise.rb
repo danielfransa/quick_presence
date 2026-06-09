@@ -314,3 +314,9 @@ Devise.setup do |config|
   # changed. Defaults to true, so a user is signed in automatically after changing a password.
   # config.sign_in_after_change_password = true
 end
+
+Warden::Manager.after_set_user except: :fetch do |user, _auth, options|
+  if options[:scope] == :user && user.persisted?
+    user.update_column(:last_login_at, Time.current)
+  end
+end
