@@ -14,7 +14,7 @@ class UserTest < ActiveSupport::TestCase
     )
 
     assert_not user.valid?
-    assert_includes user.errors[:username], "can only contain letters, numbers, and underscores"
+    assert_includes user.errors[:username], I18n.t("activerecord.errors.models.user.attributes.username.invalid_format")
   end
 
   test "normalizes username before validation" do
@@ -37,6 +37,6 @@ class UserTest < ActiveSupport::TestCase
     )
 
     assert_not user.valid?
-    assert_includes user.errors[:inactivity_terms_accepted], "must be accepted"
+    assert_includes user.errors[:inactivity_terms_accepted], I18n.t("errors.messages.accepted")
   end
 end

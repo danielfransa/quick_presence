@@ -12,7 +12,7 @@ class PublicAttendanceControllerTest < ActionDispatch::IntegrationTest
     get public_attendance_url(attendance_lists(:closed_list).public_token)
 
     assert_response :success
-    assert_includes response.body, "This attendance list has expired"
+    assert_includes response.body, I18n.t("public_attendance.closed.expired.title")
   end
 
   test "records a public attendance response" do

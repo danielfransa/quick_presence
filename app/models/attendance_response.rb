@@ -19,6 +19,6 @@ class AttendanceResponse < ApplicationRecord
   def attendance_list_must_be_open
     return if attendance_list&.open?
 
-    errors.add(:base, "Attendance list is closed")
+    errors.add(:base, :closed)
   end
 end

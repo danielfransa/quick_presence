@@ -5,6 +5,6 @@ class HomeControllerTest < ActionDispatch::IntegrationTest
     get root_url
 
     assert_response :success
-    assert_includes response.body, "QuickPresence"
+    assert_includes response.body, I18n.t("app.name")
   end
 end

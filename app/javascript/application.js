@@ -10,6 +10,12 @@ document.addEventListener("click", async (event) => {
   const source = container.querySelector("[data-public-link-source]")
   const status = container.querySelector("[data-public-link-status]")
   const value = source.value
+  const {
+    copyBlockedStatus,
+    copyDefaultLabel,
+    copySuccessLabel,
+    copySuccessStatus
+  } = container.dataset
   let copied = false
 
   if (navigator.clipboard?.writeText) {
@@ -43,19 +49,19 @@ document.addEventListener("click", async (event) => {
   window.clearTimeout(button.copyResetTimeout)
 
   if (copied) {
-    button.textContent = "Copied!"
-    status.textContent = "Public link copied to the clipboard."
+    button.textContent = copySuccessLabel
+    status.textContent = copySuccessStatus
     status.className = "small mt-2 text-success"
   } else {
     source.focus()
     source.select()
     source.setSelectionRange(0, value.length)
-    status.textContent = "Copy was blocked. Press Ctrl+C or Command+C."
+    status.textContent = copyBlockedStatus
     status.className = "small mt-2 text-danger"
   }
 
   button.copyResetTimeout = window.setTimeout(() => {
-    button.textContent = "Copy link"
+    button.textContent = copyDefaultLabel
     status.textContent = ""
   }, 3000)
 })

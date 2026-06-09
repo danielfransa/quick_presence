@@ -13,7 +13,7 @@ class PublicAttendanceController < ApplicationController
   def create
     unless @attendance_list.open?
       redirect_to public_attendance_path(@attendance_list.public_token),
-        alert: "This attendance list is closed."
+        alert: t("public_attendance.notices.closed")
       return
     end
 
@@ -26,7 +26,7 @@ class PublicAttendanceController < ApplicationController
 
     if @attendance_response.save
       redirect_to public_attendance_path(@attendance_list.public_token),
-        notice: "Attendance was recorded successfully."
+        notice: t("public_attendance.notices.recorded")
     else
       render :show, status: :unprocessable_entity
     end

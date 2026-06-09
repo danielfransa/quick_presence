@@ -5,9 +5,9 @@ class DevisePagesTest < ActionDispatch::IntegrationTest
     get new_user_registration_url
 
     assert_response :success
-    assert_includes response.body, "Create your account"
-    assert_includes response.body, "Username"
-    assert_includes response.body, "Password recovery and password changes are not available"
+    assert_includes response.body, I18n.t("accounts.registrations.new.title")
+    assert_includes response.body, User.human_attribute_name(:username)
+    assert_includes response.body, I18n.t("accounts.registrations.new.password_warning")
     assert_includes response.body, "120 days"
     assert_includes response.body, "inactivity_terms_accepted"
     assert_includes response.body, "card border-0 shadow-sm"
@@ -17,9 +17,9 @@ class DevisePagesTest < ActionDispatch::IntegrationTest
     get new_user_session_url
 
     assert_response :success
-    assert_includes response.body, "Sign in"
-    assert_includes response.body, "Username"
-    assert_includes response.body, "Password recovery is not available"
+    assert_includes response.body, I18n.t("accounts.sessions.new.title")
+    assert_includes response.body, User.human_attribute_name(:username)
+    assert_includes response.body, I18n.t("accounts.sessions.new.password_warning")
     assert_not_includes response.body, "Forgot your password?"
     assert_includes response.body, "card border-0 shadow-sm"
   end
@@ -54,7 +54,7 @@ class DevisePagesTest < ActionDispatch::IntegrationTest
     end
 
     assert_response :unprocessable_entity
-    assert_includes response.body, "must be accepted"
+    assert_includes response.body, I18n.t("errors.messages.accepted")
   end
 
   test "records the last successful login" do
@@ -79,8 +79,8 @@ class DevisePagesTest < ActionDispatch::IntegrationTest
 
     assert_response :success
     assert_includes response.body, "deleteAccountModal"
-    assert_includes response.body, "lists that are still active"
-    assert_includes response.body, "data that have not been downloaded"
+    assert_includes response.body, I18n.t("accounts.registrations.edit.delete.lists_item")
+    assert_includes response.body, I18n.t("accounts.registrations.edit.delete.responses_item")
   end
 
   test "deletes the account and all related data then signs the user out" do
@@ -98,7 +98,7 @@ class DevisePagesTest < ActionDispatch::IntegrationTest
 
     follow_redirect!
     assert_response :success
-    assert_includes response.body, "Your account and all related data have been permanently deleted"
+    assert_includes response.body, I18n.t("accounts.deleted.description")
 
     get attendance_lists_url
     assert_redirected_to new_user_session_url

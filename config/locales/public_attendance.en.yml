@@ -1,0 +1,25 @@
+en:
+  public_attendance:
+    notices:
+      closed: "This attendance list is closed."
+      recorded: "Attendance was recorded successfully."
+    show:
+      badge: "Open for responses"
+      privacy_notice: "The information you submit will be used only for this attendance list."
+      errors:
+        one: "1 error prevented your attendance from being recorded."
+        other: "%{count} errors prevented your attendance from being recorded."
+      submit: "Submit attendance"
+    closed:
+      not_started:
+        badge: "Not open yet"
+        title: "This attendance list is not open yet"
+        description: "Responses will be accepted starting at %{date} (%{time_zone})."
+      expired:
+        badge: "Expired"
+        title: "This attendance list has expired"
+        description: "Responses were accepted until %{date} (%{time_zone})."
+      inactive:
+        badge: "Closed"
+        title: "This attendance list is closed"
+        description: "Responses are no longer being accepted."

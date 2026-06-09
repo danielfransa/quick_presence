@@ -1,0 +1,88 @@
+en:
+  attendance_lists:
+    notices:
+      created: "Attendance list was created successfully."
+      updated: "Attendance list was updated successfully."
+      deleted: "Attendance list was deleted successfully."
+      closed: "Attendance list was closed successfully."
+    index:
+      title: "Attendance lists"
+      description: "Manage your temporary attendance forms."
+      new_list: "New list"
+      table:
+        title: "Title"
+        status: "Status"
+        responses: "Responses"
+        actions: "Actions"
+      empty:
+        title: "No attendance lists yet"
+        description: "Create your first public attendance form and share it by QR code."
+        action: "Create your first list"
+    new:
+      title: "New attendance list"
+      description: "Create a public form and share it by link or QR code."
+    edit:
+      title: "Edit attendance list"
+      description: "Update availability and custom fields."
+    form:
+      errors:
+        resource: "list"
+      details: "List details"
+      title_placeholder: "Database class"
+      description_placeholder: "Short instructions for participants"
+      time_zone_detected: "Time zone detected automatically"
+      time_zone_description_html: "Dates and times below will be interpreted as %{time_zone}."
+      starts_at: "Starts at"
+      ends_at: "Ends at"
+      ends_at_hint: "Required so responses can be deleted 48 hours later."
+      accept_responses: "Accept responses"
+      custom_fields: "Custom fields"
+      custom_fields_description: "Add up to 5 participant fields. Blank field names are ignored."
+      timestamp_automatic: "Timestamp is automatic"
+      timestamp_description: "The submission timestamp is recorded automatically and does not count as one of the 5 custom fields."
+      field_label: "Field %{number}"
+      field_placeholder: "Name, Student code, Class..."
+      required: "Required"
+      submit: "Save attendance list"
+    show:
+      actions:
+        responses: "Responses"
+        print_qr_pdf: "Print QR PDF"
+        export_csv: "Export CSV"
+        export_excel: "Export Excel"
+        close_list: "Close list"
+      schedule:
+        title: "Schedule"
+        time_zone: "Time zone"
+        starts_at: "Starts at"
+        ends_at: "Ends at"
+        immediately: "Immediately"
+        no_end_date: "No end date"
+      sharing:
+        title: "Public sharing"
+        public_link: "Public link"
+        copy_link: "Copy link"
+        copied: "Copied!"
+        copied_status: "Public link copied to the clipboard."
+        copy_blocked: "Copy was blocked. Press Ctrl+C or Command+C."
+      fields:
+        title: "Fields"
+        required: "Required"
+        optional: "Optional"
+        description: "Submitted responses also include a timestamp column. It is not part of the 5 custom field limit."
+      retention:
+        available_until_html: "Responses are available for download until <strong>%{date}</strong> (%{time_zone}). After that, they are automatically deleted."
+        no_end_date: "Set an end date to enable automatic deletion of submitted responses."
+      delete_confirmation: "Delete this attendance list?"
+      qr_code:
+        title: "QR code"
+        description: "Participants can scan this code to submit attendance."
+    responses:
+      title: "Responses"
+      available_until: "Available until %{date} (%{time_zone})."
+      export_csv: "Export CSV"
+      export_excel: "Export Excel"
+      timestamp: "Timestamp"
+      empty:
+        title: "No responses yet"
+        description: "Share the public link or QR code to start collecting attendance."

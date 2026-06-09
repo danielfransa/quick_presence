@@ -9,8 +9,8 @@ class AttendanceListsControllerTest < ActionDispatch::IntegrationTest
     get attendance_lists_url
 
     assert_response :success
-    assert_includes response.body, "Attendance Lists"
-    assert_includes response.body, "Log out"
+    assert_includes response.body, I18n.t("layouts.application.navigation.attendance_lists")
+    assert_includes response.body, I18n.t("layouts.application.navigation.log_out")
     assert_not_includes response.body, "collapse navbar-collapse"
     assert_includes response.body, attendance_lists(:open_list).title
   end
@@ -19,9 +19,9 @@ class AttendanceListsControllerTest < ActionDispatch::IntegrationTest
     get new_attendance_list_url
 
     assert_response :success
-    assert_equal 5, response.body.scan(/placeholder="Name, Student code, Class..."/).size
-    assert_includes response.body, "Timestamp is automatic"
-    assert_includes response.body, "Time zone detected automatically"
+    assert_equal 5, response.body.scan(/placeholder="#{Regexp.escape(I18n.t("attendance_lists.form.field_placeholder"))}"/).size
+    assert_includes response.body, I18n.t("attendance_lists.form.timestamp_automatic")
+    assert_includes response.body, I18n.t("attendance_lists.form.time_zone_detected")
     assert_includes response.body, 'name="attendance_list[time_zone]"'
   end
 
@@ -29,8 +29,8 @@ class AttendanceListsControllerTest < ActionDispatch::IntegrationTest
     get attendance_list_url(attendance_lists(:open_list))
 
     assert_response :success
-    assert_includes response.body, "Public link"
-    assert_includes response.body, "Copy link"
+    assert_includes response.body, I18n.t("attendance_lists.show.sharing.public_link")
+    assert_includes response.body, I18n.t("attendance_lists.show.sharing.copy_link")
     assert_includes response.body, "data-copy-public-link"
     assert_includes response.body, "data-public-link-status"
   end
@@ -80,7 +80,12 @@ class AttendanceListsControllerTest < ActionDispatch::IntegrationTest
     assert_equal "text/csv", response.media_type
     rows = CSV.parse(response.body)
 
-    assert_equal [ "Number", "Name", "Student code", "Timestamp" ], rows.first
+    assert_equal [
+      I18n.t("exports.attendance_list.columns.number"),
+      "Name",
+      "Student code",
+      I18n.t("exports.attendance_list.columns.timestamp")
+    ], rows.first
     assert_equal [ "1", "Ada Lovelace", "A123" ], rows.second.first(3)
     assert_match(/\A\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}\z/, rows.second.last)
   end
@@ -114,10 +119,10 @@ class AttendanceListsControllerTest < ActionDispatch::IntegrationTest
     Zip::File.open_buffer(response.body) do |workbook|
       worksheet = workbook.read("xl/worksheets/sheet1.xml")
 
-      assert_operator worksheet.index("Number"), :<, worksheet.index("Name")
-      assert_operator worksheet.index("Student code"), :<, worksheet.index("Timestamp")
+      assert_operator worksheet.index(I18n.t("exports.attendance_list.columns.number")), :<, worksheet.index("Name")
+      assert_operator worksheet.index("Student code"), :<, worksheet.index(I18n.t("exports.attendance_list.columns.timestamp"))
       assert_includes worksheet, ">1<"
-      assert_includes worksheet, "Timestamp"
+      assert_includes worksheet, I18n.t("exports.attendance_list.columns.timestamp")
       assert_includes worksheet, "Ada Lovelace"
       assert_includes worksheet, "A123"
     end
@@ -131,7 +136,12 @@ class AttendanceListsControllerTest < ActionDispatch::IntegrationTest
     end
 
     assert_response :success
-    assert_equal "Number,Name,Student code,Timestamp\n", response.body
+    assert_equal [
+      I18n.t("exports.attendance_list.columns.number"),
+      "Name",
+      "Student code",
+      I18n.t("exports.attendance_list.columns.timestamp")
+    ].to_csv, response.body
   end
 
   test "exports QR code as pdf" do

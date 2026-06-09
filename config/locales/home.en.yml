@@ -1,0 +1,18 @@
+en:
+  home:
+    index:
+      badge: "Open source attendance"
+      title: "Create attendance lists in minutes."
+      description: "QuickPresence helps organizers create temporary attendance forms with custom fields, public links, QR codes, and CSV export."
+      create_account: "Create an account"
+      sign_in: "Sign in"
+      features:
+        custom_fields:
+          title: "Custom fields"
+          description: "Collect up to 5 custom answers per list."
+        qr_sharing:
+          title: "QR sharing"
+          description: "Share a public link or QR code with participants."
+        csv_export:
+          title: "CSV export"
+          description: "Download submitted responses with timestamps."

@@ -21,7 +21,7 @@ class User < ApplicationRecord
     presence: true,
     uniqueness: { case_sensitive: false },
     length: { in: 3..32 },
-    format: { with: USERNAME_FORMAT, message: "can only contain letters, numbers, and underscores" }
+    format: { with: USERNAME_FORMAT, message: :invalid_format }
 
   validates :password,
     presence: true,

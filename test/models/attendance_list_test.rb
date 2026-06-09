@@ -51,7 +51,7 @@ class AttendanceListTest < ActiveSupport::TestCase
     attendance_list = users(:organizer).attendance_lists.new(title: "No End Date")
 
     assert_not attendance_list.valid?
-    assert_includes attendance_list.errors[:ends_at], "can't be blank"
+    assert_includes attendance_list.errors[:ends_at], I18n.t("errors.messages.blank")
   end
 
   test "calculates response retention expiration" do
@@ -83,7 +83,8 @@ class AttendanceListTest < ActiveSupport::TestCase
     )
 
     assert_not attendance_list.valid?
-    assert_includes attendance_list.errors[:ends_at], "must be after the start date and time"
+    assert_includes attendance_list.errors[:ends_at],
+      I18n.t("activerecord.errors.models.attendance_list.attributes.ends_at.before_start")
   end
 
   test "allows at most five custom fields" do
@@ -94,6 +95,7 @@ class AttendanceListTest < ActiveSupport::TestCase
     end
 
     assert_not attendance_list.valid?
-    assert_includes attendance_list.errors[:attendance_fields], "allows at most 5 fields"
+    assert_includes attendance_list.errors[:attendance_fields],
+      I18n.t("activerecord.errors.models.attendance_list.attributes.attendance_fields.too_many")
   end
 end

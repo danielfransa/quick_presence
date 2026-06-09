@@ -10,6 +10,6 @@ class AttendanceAnswer < ApplicationRecord
   def required_field_must_have_value
     return unless attendance_field&.required?
 
-    errors.add(:value, "can't be blank") if value.blank?
+    errors.add(:value, :blank) if value.blank?
   end
 end

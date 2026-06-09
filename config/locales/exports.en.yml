@@ -1,0 +1,15 @@
+en:
+  exports:
+    attendance_list:
+      columns:
+        number: "Number"
+        timestamp: "Timestamp"
+      timestamp_format: "%Y-%m-%d %H:%M:%S"
+      filenames:
+        csv: "attendance-list-%{id}.csv"
+        xlsx: "attendance-list-%{id}.xlsx"
+        qr_pdf: "attendance-list-%{id}-qr-code.pdf"
+      xlsx:
+        sheet_name: "Responses"
+      qr_pdf:
+        privacy_notice: "The submitted data belongs to the attendance list creator and will not be used outside this context."

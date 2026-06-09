@@ -1,20 +1,21 @@
 <section>
   <div class="d-flex flex-column flex-md-row justify-content-between gap-3 mb-4">
     <div>
-      <h1 class="h2 fw-bold mb-1">Responses</h1>
+      <h1 class="h2 fw-bold mb-1"><%= t(".title") %></h1>
       <p class="text-secondary mb-0"><%= @attendance_list.title %></p>
       <% if @attendance_list.responses_retention_expires_at.present? %>
         <p class="text-secondary small mb-0">
-          Available until <%= l(@attendance_list.local_time(@attendance_list.responses_retention_expires_at), format: :long) %>
-          (<%= @attendance_list.time_zone %>).
+          <%= t(".available_until",
+            date: l(@attendance_list.local_time(@attendance_list.responses_retention_expires_at), format: :long),
+            time_zone: @attendance_list.time_zone) %>
         </p>
       <% end %>
     </div>
 
     <div class="d-flex flex-wrap gap-2 align-self-md-start">
-      <%= link_to "Export CSV", export_attendance_list_path(@attendance_list, format: :csv), class: "btn btn-outline-primary" %>
-      <%= link_to "Export Excel", export_attendance_list_path(@attendance_list, format: :xlsx), class: "btn btn-primary" %>
-      <%= link_to "Back", @attendance_list, class: "btn btn-outline-secondary" %>
+      <%= link_to t(".export_csv"), export_attendance_list_path(@attendance_list, format: :csv), class: "btn btn-outline-primary" %>
+      <%= link_to t(".export_excel"), export_attendance_list_path(@attendance_list, format: :xlsx), class: "btn btn-primary" %>
+      <%= link_to t("common.actions.back"), @attendance_list, class: "btn btn-outline-secondary" %>
     </div>
   </div>
 
@@ -24,7 +25,7 @@
         <table class="table table-striped table-hover align-middle mb-0">
           <thead class="table-light">
             <tr>
-              <th>Timestamp</th>
+              <th><%= t(".timestamp") %></th>
               <% @attendance_list.attendance_fields.ordered.each do |field| %>
                 <th><%= field.label %></th>
               <% end %>
@@ -46,8 +47,8 @@
     </div>
   <% else %>
     <div class="p-5 bg-white border rounded-3 text-center shadow-sm">
-      <h2 class="h4">No responses yet</h2>
-      <p class="text-secondary mb-0">Share the public link or QR code to start collecting attendance.</p>
+      <h2 class="h4"><%= t(".empty.title") %></h2>
+      <p class="text-secondary mb-0"><%= t(".empty.description") %></p>
     </div>
   <% end %>
 </section>

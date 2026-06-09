@@ -11,6 +11,7 @@ class AttendanceResponseTest < ActiveSupport::TestCase
     response = attendance_lists(:closed_list).attendance_responses.new
 
     assert_not response.valid?
-    assert_includes response.errors[:base], "Attendance list is closed"
+    assert_includes response.errors[:base],
+      I18n.t("activerecord.errors.models.attendance_response.attributes.base.closed")
   end
 end

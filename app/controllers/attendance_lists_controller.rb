@@ -22,7 +22,7 @@ class AttendanceListsController < ApplicationController
     @attendance_list = current_user.attendance_lists.new(attendance_list_params)
 
     if @attendance_list.save
-      redirect_to @attendance_list, notice: "Attendance list was created successfully."
+      redirect_to @attendance_list, notice: t("attendance_lists.notices.created")
     else
       build_missing_fields
       render :new, status: :unprocessable_entity
@@ -35,7 +35,7 @@ class AttendanceListsController < ApplicationController
 
   def update
     if @attendance_list.update(attendance_list_params)
-      redirect_to @attendance_list, notice: "Attendance list was updated successfully."
+      redirect_to @attendance_list, notice: t("attendance_lists.notices.updated")
     else
       build_missing_fields
       render :edit, status: :unprocessable_entity
@@ -44,7 +44,7 @@ class AttendanceListsController < ApplicationController
 
   def destroy
     @attendance_list.destroy
-    redirect_to attendance_lists_path, notice: "Attendance list was deleted successfully."
+    redirect_to attendance_lists_path, notice: t("attendance_lists.notices.deleted")
   end
 
   def responses
@@ -62,24 +62,28 @@ class AttendanceListsController < ApplicationController
     responses = @attendance_list.attendance_responses
       .includes(attendance_answers: :attendance_field)
       .order(:submitted_at, :id)
-    rows = [ [ "Number" ] + fields.map(&:label) + [ "Timestamp" ] ]
+    rows = [
+      [ t("exports.attendance_list.columns.number") ] +
+        fields.map(&:label) +
+        [ t("exports.attendance_list.columns.timestamp") ]
+    ]
 
     responses.each_with_index do |response, index|
       answers_by_field_id = response.attendance_answers.index_by(&:attendance_field_id)
       rows << [ index + 1 ] +
         fields.map { |field| answers_by_field_id[field.id]&.value } +
-        [ response.submitted_at.strftime("%Y-%m-%d %H:%M:%S") ]
+        [ response.submitted_at.strftime(t("exports.attendance_list.timestamp_format")) ]
     end
 
     respond_to do |format|
       format.csv do
         send_data CSV.generate { |csv| rows.each { |row| csv << row } },
-          filename: "attendance-list-#{@attendance_list.id}.csv",
+          filename: t("exports.attendance_list.filenames.csv", id: @attendance_list.id),
           type: "text/csv"
       end
       format.xlsx do
         send_data AttendanceListXlsx.new(rows).render,
-          filename: "attendance-list-#{@attendance_list.id}.xlsx",
+          filename: t("exports.attendance_list.filenames.xlsx", id: @attendance_list.id),
           type: AttendanceListXlsx::CONTENT_TYPE
       end
     end
@@ -92,14 +96,14 @@ class AttendanceListsController < ApplicationController
     )
 
     send_data pdf.render,
-      filename: "attendance-list-#{@attendance_list.id}-qr-code.pdf",
+      filename: t("exports.attendance_list.filenames.qr_pdf", id: @attendance_list.id),
       type: "application/pdf",
       disposition: "inline"
   end
 
   def close
     @attendance_list.update!(active: false)
-    redirect_to @attendance_list, notice: "Attendance list was closed successfully."
+    redirect_to @attendance_list, notice: t("attendance_lists.notices.closed")
   end
 
   private

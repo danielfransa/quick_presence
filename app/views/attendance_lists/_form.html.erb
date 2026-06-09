@@ -1,7 +1,11 @@
 <%= form_with model: attendance_list do |form| %>
   <% if attendance_list.errors.any? %>
     <div class="alert alert-danger" role="alert">
-      <p class="fw-semibold mb-2"><%= pluralize(attendance_list.errors.count, "error") %> prevented this list from being saved.</p>
+      <p class="fw-semibold mb-2">
+        <%= t("common.errors.form_not_saved",
+          count: attendance_list.errors.count,
+          resource: t("attendance_lists.form.errors.resource")) %>
+      </p>
       <ul class="mb-0">
         <% attendance_list.errors.full_messages.each do |message| %>
           <li><%= message %></li>
@@ -12,45 +16,45 @@
 
   <div class="card border-0 shadow-sm mb-4">
     <div class="card-header bg-white">
-      <h2 class="h5 mb-0">List details</h2>
+      <h2 class="h5 mb-0"><%= t("attendance_lists.form.details") %></h2>
     </div>
     <div class="card-body">
       <div class="mb-3">
         <%= form.label :title, class: "form-label" %>
-        <%= form.text_field :title, required: true, class: "form-control", placeholder: "Database class" %>
+        <%= form.text_field :title, required: true, class: "form-control", placeholder: t("attendance_lists.form.title_placeholder") %>
       </div>
 
       <div class="mb-3">
         <%= form.label :description, class: "form-label" %>
-        <%= form.text_area :description, rows: 4, class: "form-control", placeholder: "Short instructions for participants" %>
+        <%= form.text_area :description, rows: 4, class: "form-control", placeholder: t("attendance_lists.form.description_placeholder") %>
       </div>
 
       <div class="mb-3">
         <%= form.hidden_field :time_zone, value: attendance_list.time_zone, data: { time_zone_field: true } %>
         <div class="alert alert-light border mb-0" role="status">
-          <div class="fw-semibold">Time zone detected automatically</div>
+          <div class="fw-semibold"><%= t("attendance_lists.form.time_zone_detected") %></div>
           <div class="small text-secondary">
-            Dates and times below will be interpreted as <span data-time-zone-label><%= attendance_list.time_zone %></span>.
+            <%= t("attendance_lists.form.time_zone_description_html", time_zone: tag.span(attendance_list.time_zone, data: { time_zone_label: true })) %>
           </div>
         </div>
       </div>
 
       <div class="row g-3">
         <div class="col-md-6">
-          <%= form.label :starts_at_local, "Starts at", class: "form-label" %>
+          <%= form.label :starts_at_local, t("attendance_lists.form.starts_at"), class: "form-label" %>
           <%= form.datetime_field :starts_at_local, value: attendance_list.starts_at_local, class: "form-control" %>
         </div>
 
         <div class="col-md-6">
-          <%= form.label :ends_at_local, "Ends at", class: "form-label" %>
+          <%= form.label :ends_at_local, t("attendance_lists.form.ends_at"), class: "form-label" %>
           <%= form.datetime_field :ends_at_local, value: attendance_list.ends_at_local, required: true, class: "form-control" %>
-          <div class="form-text">Required so responses can be deleted 48 hours later.</div>
+          <div class="form-text"><%= t("attendance_lists.form.ends_at_hint") %></div>
         </div>
       </div>
 
       <div class="form-check form-switch mt-3">
         <%= form.check_box :active, class: "form-check-input" %>
-        <%= form.label :active, "Accept responses", class: "form-check-label" %>
+        <%= form.label :active, t("attendance_lists.form.accept_responses"), class: "form-check-label" %>
       </div>
     </div>
   </div>
@@ -58,25 +62,21 @@
   <div class="card border-0 shadow-sm mb-4">
     <div class="card-header bg-white d-flex flex-column flex-md-row justify-content-between gap-2">
       <div>
-        <h2 class="h5 mb-1">Custom fields</h2>
-        <p class="mb-0 text-secondary small">
-          Add up to 5 participant fields. Blank field names are ignored.
-        </p>
+        <h2 class="h5 mb-1"><%= t("attendance_lists.form.custom_fields") %></h2>
+        <p class="mb-0 text-secondary small"><%= t("attendance_lists.form.custom_fields_description") %></p>
       </div>
-      <span class="badge text-bg-light align-self-md-start">Timestamp is automatic</span>
+      <span class="badge text-bg-light align-self-md-start"><%= t("attendance_lists.form.timestamp_automatic") %></span>
     </div>
     <div class="card-body">
-      <p class="text-secondary small">
-        The submission timestamp is recorded automatically and does not count as one of the 5 custom fields.
-      </p>
+      <p class="text-secondary small"><%= t("attendance_lists.form.timestamp_description") %></p>
 
       <div class="vstack gap-3">
         <%= form.fields_for :attendance_fields do |field_form| %>
           <div class="border rounded-3 p-3 bg-light">
             <div class="row g-3 align-items-end">
               <div class="col-md-8">
-                <%= field_form.label :label, "Field #{field_form.index.to_i + 1}", class: "form-label" %>
-                <%= field_form.text_field :label, class: "form-control", placeholder: "Name, Student code, Class..." %>
+                <%= field_form.label :label, t("attendance_lists.form.field_label", number: field_form.index.to_i + 1), class: "form-label" %>
+                <%= field_form.text_field :label, class: "form-control", placeholder: t("attendance_lists.form.field_placeholder") %>
                 <%= field_form.hidden_field :field_type, value: "text" %>
                 <%= field_form.hidden_field :position, value: field_form.index.to_i %>
               </div>
@@ -84,7 +84,7 @@
               <div class="col-md-4">
                 <div class="form-check">
                   <%= field_form.check_box :required, checked: field_form.object.required.nil? ? true : field_form.object.required, class: "form-check-input" %>
-                  <%= field_form.label :required, "Required", class: "form-check-label" %>
+                  <%= field_form.label :required, t("attendance_lists.form.required"), class: "form-check-label" %>
                 </div>
               </div>
             </div>
@@ -95,8 +95,8 @@
   </div>
 
   <div class="d-flex flex-wrap gap-2">
-    <%= form.submit "Save attendance list", class: "btn btn-primary" %>
-    <%= link_to "Cancel", attendance_lists_path, class: "btn btn-outline-secondary" %>
+    <%= form.submit t("attendance_lists.form.submit"), class: "btn btn-primary" %>
+    <%= link_to t("common.actions.cancel"), attendance_lists_path, class: "btn btn-outline-secondary" %>
   </div>
 <% end %>
 

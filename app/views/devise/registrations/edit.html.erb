@@ -1,35 +1,33 @@
 <section class="row justify-content-center">
   <div class="col-lg-8">
     <div class="mb-4">
-      <h1 class="h2 fw-bold mb-1">Account settings</h1>
-      <p class="text-secondary mb-0">Review your account and deletion options.</p>
+      <h1 class="h2 fw-bold mb-1"><%= t("accounts.registrations.edit.title") %></h1>
+      <p class="text-secondary mb-0"><%= t("accounts.registrations.edit.description") %></p>
     </div>
 
     <div class="card border-0 shadow-sm mb-4">
       <div class="card-body p-4">
         <dl class="row mb-0">
-          <dt class="col-sm-3">Username</dt>
+          <dt class="col-sm-3"><%= User.human_attribute_name(:username) %></dt>
           <dd class="col-sm-9"><%= resource.username %></dd>
         </dl>
 
         <div class="alert alert-warning mt-4 mb-0" role="alert">
-          Password recovery and password changes are not available in this version. Keep your password stored safely.
+          <%= t("accounts.registrations.edit.password_warning") %>
         </div>
 
         <div class="mt-4">
-          <%= link_to "Back", attendance_lists_path, class: "btn btn-outline-secondary" %>
+          <%= link_to t("common.actions.back"), attendance_lists_path, class: "btn btn-outline-secondary" %>
         </div>
       </div>
     </div>
 
     <div class="card border-danger shadow-sm">
       <div class="card-body">
-        <h2 class="h5 text-danger">Delete account</h2>
-        <p class="text-secondary">
-          Permanently remove your account and every attendance list associated with it.
-        </p>
+        <h2 class="h5 text-danger"><%= t("accounts.registrations.edit.delete.title") %></h2>
+        <p class="text-secondary"><%= t("accounts.registrations.edit.delete.description") %></p>
         <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#deleteAccountModal">
-          Delete my account
+          <%= t("accounts.registrations.edit.delete.button") %>
         </button>
       </div>
     </div>
@@ -40,20 +38,20 @@
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-header">
-        <h2 class="modal-title fs-5" id="deleteAccountModalLabel">Permanently delete your account?</h2>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <h2 class="modal-title fs-5" id="deleteAccountModalLabel"><%= t("accounts.registrations.edit.delete.modal_title") %></h2>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="<%= t("common.actions.close") %>"></button>
       </div>
       <div class="modal-body">
-        <p>This action cannot be undone. You will permanently lose:</p>
+        <p><%= t("accounts.registrations.edit.delete.warning") %></p>
         <ul class="mb-0">
-          <li>Your account and access credentials</li>
-          <li>All attendance lists, including lists that are still active</li>
-          <li>All responses and data that have not been downloaded</li>
+          <li><%= t("accounts.registrations.edit.delete.account_item") %></li>
+          <li><%= t("accounts.registrations.edit.delete.lists_item") %></li>
+          <li><%= t("accounts.registrations.edit.delete.responses_item") %></li>
         </ul>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
-        <%= button_to "Yes, delete everything",
+        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal"><%= t("common.actions.cancel") %></button>
+        <%= button_to t("accounts.registrations.edit.delete.confirm"),
           registration_path(resource_name),
           method: :delete,
           class: "btn btn-danger" %>

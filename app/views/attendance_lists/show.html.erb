@@ -2,9 +2,9 @@
   <div class="d-flex flex-column flex-lg-row justify-content-between gap-3 mb-4">
     <div>
       <% if @attendance_list.open? %>
-        <span class="badge text-bg-success mb-2">Open</span>
+        <span class="badge text-bg-success mb-2"><%= t("common.status.open") %></span>
       <% else %>
-        <span class="badge text-bg-secondary mb-2">Closed</span>
+        <span class="badge text-bg-secondary mb-2"><%= t("common.status.closed") %></span>
       <% end %>
       <h1 class="h2 fw-bold mb-2"><%= @attendance_list.title %></h1>
       <% if @attendance_list.description.present? %>
@@ -13,11 +13,11 @@
     </div>
 
     <div class="d-flex flex-wrap gap-2 align-self-lg-start">
-      <%= link_to "Edit", edit_attendance_list_path(@attendance_list), class: "btn btn-outline-secondary" %>
-      <%= link_to "Responses", responses_attendance_list_path(@attendance_list), class: "btn btn-outline-primary" %>
-      <%= link_to "Print QR PDF", qr_code_pdf_attendance_list_path(@attendance_list), class: "btn btn-outline-primary", target: "_blank", rel: "noopener" %>
-      <%= link_to "Export CSV", export_attendance_list_path(@attendance_list, format: :csv), class: "btn btn-outline-primary" %>
-      <%= link_to "Export Excel", export_attendance_list_path(@attendance_list, format: :xlsx), class: "btn btn-primary" %>
+      <%= link_to t("common.actions.edit"), edit_attendance_list_path(@attendance_list), class: "btn btn-outline-secondary" %>
+      <%= link_to t(".actions.responses"), responses_attendance_list_path(@attendance_list), class: "btn btn-outline-primary" %>
+      <%= link_to t(".actions.print_qr_pdf"), qr_code_pdf_attendance_list_path(@attendance_list), class: "btn btn-outline-primary", target: "_blank", rel: "noopener" %>
+      <%= link_to t(".actions.export_csv"), export_attendance_list_path(@attendance_list, format: :csv), class: "btn btn-outline-primary" %>
+      <%= link_to t(".actions.export_excel"), export_attendance_list_path(@attendance_list, format: :xlsx), class: "btn btn-primary" %>
     </div>
   </div>
 
@@ -25,33 +25,39 @@
     <div class="col-lg-8">
       <div class="card border-0 shadow-sm mb-4">
         <div class="card-header bg-white">
-          <h2 class="h5 mb-0">Schedule</h2>
+          <h2 class="h5 mb-0"><%= t(".schedule.title") %></h2>
         </div>
         <div class="card-body">
           <dl class="row mb-0">
-            <dt class="col-sm-4">Time zone</dt>
+            <dt class="col-sm-4"><%= t(".schedule.time_zone") %></dt>
             <dd class="col-sm-8"><%= @attendance_list.time_zone %></dd>
 
-            <dt class="col-sm-4">Starts at</dt>
-            <dd class="col-sm-8"><%= @attendance_list.starts_at.present? ? l(@attendance_list.local_time(@attendance_list.starts_at), format: :long) : "Immediately" %></dd>
+            <dt class="col-sm-4"><%= t(".schedule.starts_at") %></dt>
+            <dd class="col-sm-8"><%= @attendance_list.starts_at.present? ? l(@attendance_list.local_time(@attendance_list.starts_at), format: :long) : t(".schedule.immediately") %></dd>
 
-            <dt class="col-sm-4">Ends at</dt>
-            <dd class="col-sm-8"><%= @attendance_list.ends_at.present? ? l(@attendance_list.local_time(@attendance_list.ends_at), format: :long) : "No end date" %></dd>
+            <dt class="col-sm-4"><%= t(".schedule.ends_at") %></dt>
+            <dd class="col-sm-8"><%= @attendance_list.ends_at.present? ? l(@attendance_list.local_time(@attendance_list.ends_at), format: :long) : t(".schedule.no_end_date") %></dd>
           </dl>
         </div>
       </div>
 
       <div class="card border-0 shadow-sm mb-4">
         <div class="card-header bg-white">
-          <h2 class="h5 mb-0">Public sharing</h2>
+          <h2 class="h5 mb-0"><%= t(".sharing.title") %></h2>
         </div>
         <div class="card-body">
-          <label class="form-label">Public link</label>
-          <div data-public-link>
+          <label class="form-label"><%= t(".sharing.public_link") %></label>
+          <div
+            data-public-link
+            data-copy-default-label="<%= t(".sharing.copy_link") %>"
+            data-copy-success-label="<%= t(".sharing.copied") %>"
+            data-copy-success-status="<%= t(".sharing.copied_status") %>"
+            data-copy-blocked-status="<%= t(".sharing.copy_blocked") %>"
+          >
             <div class="input-group">
               <input class="form-control" readonly value="<%= public_attendance_url(@attendance_list.public_token) %>" data-public-link-source>
-              <button type="button" class="btn btn-primary" data-copy-public-link>Copy link</button>
-              <%= link_to "Open", public_attendance_path(@attendance_list.public_token), class: "btn btn-outline-secondary", target: "_blank", rel: "noopener" %>
+              <button type="button" class="btn btn-primary" data-copy-public-link><%= t(".sharing.copy_link") %></button>
+              <%= link_to t("common.actions.open"), public_attendance_path(@attendance_list.public_token), class: "btn btn-outline-secondary", target: "_blank", rel: "noopener" %>
             </div>
             <div class="small mt-2" role="status" aria-live="polite" data-public-link-status></div>
           </div>
@@ -60,53 +66,53 @@
 
       <div class="card border-0 shadow-sm mb-4">
         <div class="card-header bg-white d-flex justify-content-between align-items-center">
-          <h2 class="h5 mb-0">Fields</h2>
-          <span class="badge text-bg-light">Timestamp is automatic</span>
+          <h2 class="h5 mb-0"><%= t(".fields.title") %></h2>
+          <span class="badge text-bg-light"><%= t("attendance_lists.form.timestamp_automatic") %></span>
         </div>
         <div class="list-group list-group-flush">
           <% @attendance_list.attendance_fields.ordered.each do |field| %>
             <div class="list-group-item d-flex justify-content-between align-items-center">
               <span class="fw-semibold"><%= field.label %></span>
               <span class="badge <%= field.required? ? "text-bg-primary" : "text-bg-secondary" %>">
-                <%= field.required? ? "Required" : "Optional" %>
+                <%= field.required? ? t(".fields.required") : t(".fields.optional") %>
               </span>
             </div>
           <% end %>
         </div>
         <div class="card-footer bg-white text-secondary small">
-          Submitted responses also include a timestamp column. It is not part of the 5 custom field limit.
+          <%= t(".fields.description") %>
         </div>
       </div>
 
       <div class="alert alert-info" role="alert">
         <% if @attendance_list.responses_retention_expires_at.present? %>
-          Responses are available for download until
-          <strong><%= l(@attendance_list.local_time(@attendance_list.responses_retention_expires_at), format: :long) %></strong>
-          (<%= @attendance_list.time_zone %>). After that, they are automatically deleted.
+          <%= t(".retention.available_until_html",
+            date: l(@attendance_list.local_time(@attendance_list.responses_retention_expires_at), format: :long),
+            time_zone: @attendance_list.time_zone) %>
         <% else %>
-          Set an end date to enable automatic deletion of submitted responses.
+          <%= t(".retention.no_end_date") %>
         <% end %>
       </div>
 
       <div class="d-flex flex-wrap gap-2">
         <% if @attendance_list.open? %>
-          <%= button_to "Close list", close_attendance_list_path(@attendance_list), method: :patch, class: "btn btn-warning" %>
+          <%= button_to t(".actions.close_list"), close_attendance_list_path(@attendance_list), method: :patch, class: "btn btn-warning" %>
         <% end %>
-        <%= button_to "Delete", @attendance_list, method: :delete, class: "btn btn-outline-danger", data: { turbo_confirm: "Delete this attendance list?" } %>
+        <%= button_to t("common.actions.delete"), @attendance_list, method: :delete, class: "btn btn-outline-danger", data: { turbo_confirm: t(".delete_confirmation") } %>
       </div>
     </div>
 
     <div class="col-lg-4">
       <div class="card border-0 shadow-sm">
         <div class="card-header bg-white">
-          <h2 class="h5 mb-0">QR code</h2>
+          <h2 class="h5 mb-0"><%= t(".qr_code.title") %></h2>
         </div>
         <div class="card-body text-center">
           <div class="d-inline-block border rounded-3 p-3 bg-white">
             <%= qr_code_svg(public_attendance_url(@attendance_list.public_token)) %>
           </div>
-          <p class="small text-secondary mt-3 mb-0">Participants can scan this code to submit attendance.</p>
-          <%= link_to "Print QR PDF", qr_code_pdf_attendance_list_path(@attendance_list), class: "btn btn-outline-primary btn-sm mt-3", target: "_blank", rel: "noopener" %>
+          <p class="small text-secondary mt-3 mb-0"><%= t(".qr_code.description") %></p>
+          <%= link_to t(".actions.print_qr_pdf"), qr_code_pdf_attendance_list_path(@attendance_list), class: "btn btn-outline-primary btn-sm mt-3", target: "_blank", rel: "noopener" %>
         </div>
       </div>
     </div>

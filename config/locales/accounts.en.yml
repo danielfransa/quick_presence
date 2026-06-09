@@ -1,0 +1,44 @@
+en:
+  accounts:
+    deleted:
+      title: "Account deleted"
+      description: "Your account and all related data have been permanently deleted."
+      return_home: "Return to home"
+    registrations:
+      new:
+        title: "Create your account"
+        description: "Start creating attendance lists with public links and QR codes."
+        password_warning: "Password recovery and password changes are not available in this version. Choose a strong password and store it safely."
+        username_hint: "Use 3 to 32 letters, numbers, or underscores."
+        minimum_password_length: "%{count} characters minimum"
+        inactivity_notice: "Accounts that go 120 days without a login are permanently deleted, including all attendance lists and responses."
+        inactivity_acceptance: "I understand and accept that my account and all related data will be permanently deleted if I do not log in for 120 days."
+        submit: "Create account"
+      edit:
+        title: "Account settings"
+        description: "Review your account and deletion options."
+        password_warning: "Password recovery and password changes are not available in this version. Keep your password stored safely."
+        delete:
+          title: "Delete account"
+          description: "Permanently remove your account and every attendance list associated with it."
+          button: "Delete my account"
+          modal_title: "Permanently delete your account?"
+          warning: "This action cannot be undone. You will permanently lose:"
+          account_item: "Your account and access credentials"
+          lists_item: "All attendance lists, including lists that are still active"
+          responses_item: "All responses and data that have not been downloaded"
+          confirm: "Yes, delete everything"
+    sessions:
+      new:
+        title: "Sign in"
+        description: "Access your attendance lists and submitted responses."
+        submit: "Sign in"
+        password_warning: "Password recovery is not available. Keep your password stored safely."
+    shared:
+      username_placeholder: "organizer_name"
+      links:
+        create_account: "Create an account"
+        confirmation_instructions: "Didn't receive confirmation instructions?"
+        sign_in: "Sign in"
+        sign_in_with: "Sign in with %{provider}"
+        unlock_instructions: "Didn't receive unlock instructions?"

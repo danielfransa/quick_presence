@@ -1,6 +1,4 @@
 class AttendanceListQrCodePdf
-  PRIVACY_NOTICE = "The submitted data belongs to the attendance list creator and will not be used outside this context."
-
   def initialize(attendance_list, public_url)
     @attendance_list = attendance_list
     @public_url = public_url
@@ -52,7 +50,7 @@ class AttendanceListQrCodePdf
     pdf.bounding_box([ 0, 58 ], width: pdf.bounds.width, height: 58) do
       pdf.stroke_horizontal_rule
       pdf.move_down 12
-      pdf.text PRIVACY_NOTICE, align: :center, size: 10, color: "555555"
+      pdf.text I18n.t("exports.attendance_list.qr_pdf.privacy_notice"), align: :center, size: 10, color: "555555"
     end
   end
 end

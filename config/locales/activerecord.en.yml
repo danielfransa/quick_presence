@@ -1,0 +1,50 @@
+en:
+  activerecord:
+    models:
+      attendance_answer: "attendance answer"
+      attendance_field: "attendance field"
+      attendance_list: "attendance list"
+      attendance_response: "attendance response"
+      user: "user"
+    attributes:
+      attendance_answer:
+        value: "Value"
+      attendance_field:
+        field_type: "Field type"
+        label: "Label"
+        position: "Position"
+        required: "Required"
+      attendance_list:
+        active: "Active"
+        attendance_fields: "Attendance fields"
+        description: "Description"
+        ends_at: "Ends at"
+        starts_at: "Starts at"
+        time_zone: "Time zone"
+        title: "Title"
+      attendance_response:
+        submitted_at: "Submitted at"
+      user:
+        inactivity_terms_accepted: "Inactivity deletion terms"
+        password: "Password"
+        password_confirmation: "Password confirmation"
+        remember_me: "Remember me"
+        username: "Username"
+    errors:
+      models:
+        attendance_list:
+          attributes:
+            attendance_fields:
+              too_many: "allows at most 5 fields"
+            ends_at:
+              before_start: "must be after the start date and time"
+            time_zone:
+              unsupported: "is not supported"
+        attendance_response:
+          attributes:
+            base:
+              closed: "Attendance list is closed"
+        user:
+          attributes:
+            username:
+              invalid_format: "can only contain letters, numbers, and underscores"

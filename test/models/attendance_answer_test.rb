@@ -9,7 +9,7 @@ class AttendanceAnswerTest < ActiveSupport::TestCase
     )
 
     assert_not answer.valid?
-    assert_includes answer.errors[:value], "can't be blank"
+    assert_includes answer.errors[:value], I18n.t("errors.messages.blank")
   end
 
   test "allows blank values for optional fields" do

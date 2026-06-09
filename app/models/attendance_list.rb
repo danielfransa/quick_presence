@@ -101,7 +101,7 @@ class AttendanceList < ApplicationRecord
   end
 
   def time_zone_must_be_supported
-    errors.add(:time_zone, "is not supported") if ActiveSupport::TimeZone[time_zone].blank?
+    errors.add(:time_zone, :unsupported) if ActiveSupport::TimeZone[time_zone].blank?
   end
 
   def parse_local_datetime(value)
@@ -117,12 +117,12 @@ class AttendanceList < ApplicationRecord
   def maximum_of_five_fields
     active_fields = attendance_fields.reject(&:marked_for_destruction?)
 
-    errors.add(:attendance_fields, "allows at most 5 fields") if active_fields.size > 5
+    errors.add(:attendance_fields, :too_many) if active_fields.size > 5
   end
 
   def ends_at_after_starts_at
     return if starts_at.blank? || ends_at.blank?
 
-    errors.add(:ends_at, "must be after the start date and time") if ends_at <= starts_at
+    errors.add(:ends_at, :before_start) if ends_at <= starts_at
   end
 end

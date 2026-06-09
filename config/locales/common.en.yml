@@ -1,0 +1,33 @@
+en:
+  app:
+    name: "QuickPresence"
+  common:
+    actions:
+      back: "Back"
+      cancel: "Cancel"
+      close: "Close"
+      delete: "Delete"
+      edit: "Edit"
+      open: "Open"
+    status:
+      closed: "Closed"
+      open: "Open"
+    errors:
+      form_not_saved:
+        one: "1 error prevented this %{resource} from being saved."
+        other: "%{count} errors prevented this %{resource} from being saved."
+  layouts:
+    application:
+      navigation:
+        account_settings: "Account settings"
+        attendance_lists: "Attendance Lists"
+        log_out: "Log out"
+        new_list: "New list"
+        sign_in: "Sign in"
+        sign_up: "Sign up"
+  date:
+    formats:
+      long: "%B %d, %Y"
+  time:
+    formats:
+      long: "%B %d, %Y at %H:%M"
