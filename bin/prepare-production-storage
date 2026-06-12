@@ -1,0 +1,15 @@
+#!/bin/sh
+set -eu
+
+project_root=$(CDPATH= cd -- "$(dirname -- "$0")/.." && pwd)
+
+if [ -f "$project_root/.env" ]; then
+  set -a
+  . "$project_root/.env"
+  set +a
+fi
+
+storage_path="${APP_STORAGE_PATH:-/var/lib/quick_presence/storage}"
+
+install -d -m 0750 -o 1000 -g 1000 "$storage_path"
+printf 'Production storage ready at %s\n' "$storage_path"

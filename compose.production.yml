@@ -1,0 +1,13 @@
+services:
+  web:
+    image: ${APP_IMAGE:?Set APP_IMAGE in .env}
+    env_file:
+      - .env
+    environment:
+      RAILS_ENV: production
+      SOLID_QUEUE_IN_PUMA: "true"
+    ports:
+      - "${APP_PORT:-80}:80"
+    volumes:
+      - "${APP_STORAGE_PATH:?Set APP_STORAGE_PATH in .env}:/rails/storage"
+    restart: unless-stopped
