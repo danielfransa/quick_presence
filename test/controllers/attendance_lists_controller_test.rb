@@ -6,13 +6,14 @@ class AttendanceListsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "shows current user's attendance lists" do
-    get attendance_lists_url
+    sql_statements = capture_sql { get attendance_lists_url }
 
     assert_response :success
     assert_includes response.body, I18n.t("layouts.application.navigation.attendance_lists")
     assert_includes response.body, I18n.t("layouts.application.navigation.log_out")
     assert_not_includes response.body, "collapse navbar-collapse"
     assert_includes response.body, attendance_lists(:open_list).title
+    assert_not sql_statements.any? { |sql| sql.match?(/COUNT\(.+\).*attendance_responses/i) }
   end
 
   test "shows five custom field slots on new form" do
@@ -156,5 +157,19 @@ class AttendanceListsControllerTest < ActionDispatch::IntegrationTest
     get qr_code_pdf_attendance_list_url(attendance_lists(:closed_list))
 
     assert_response :not_found
+  end
+
+  private
+
+  def capture_sql
+    statements = []
+    subscriber = ActiveSupport::Notifications.subscribe("sql.active_record") do |_name, _start, _finish, _id, payload|
+      statements << payload[:sql] unless payload[:name] == "SCHEMA"
+    end
+
+    yield
+    statements
+  ensure
+    ActiveSupport::Notifications.unsubscribe(subscriber) if subscriber
   end
 end

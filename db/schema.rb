@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_06_09_000000) do
+ActiveRecord::Schema[8.1].define(version: 2026_06_09_010000) do
   create_table "attendance_answers", force: :cascade do |t|
     t.integer "attendance_field_id", null: false
     t.integer "attendance_response_id", null: false
@@ -36,6 +36,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_06_09_000000) do
 
   create_table "attendance_lists", force: :cascade do |t|
     t.boolean "active", default: true, null: false
+    t.integer "attendance_responses_count", default: 0, null: false
     t.datetime "created_at", null: false
     t.text "description"
     t.datetime "ends_at"

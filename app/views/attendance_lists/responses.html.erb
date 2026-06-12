@@ -26,7 +26,7 @@
           <thead class="table-light">
             <tr>
               <th><%= t(".timestamp") %></th>
-              <% @attendance_list.attendance_fields.ordered.each do |field| %>
+              <% @fields.each do |field| %>
                 <th><%= field.label %></th>
               <% end %>
             </tr>
@@ -36,7 +36,7 @@
               <% answers_by_field_id = response.attendance_answers.index_by(&:attendance_field_id) %>
               <tr>
                 <td class="text-nowrap text-secondary"><%= l(response.submitted_at, format: :long) %></td>
-                <% @attendance_list.attendance_fields.ordered.each do |field| %>
+                <% @fields.each do |field| %>
                   <td><%= answers_by_field_id[field.id]&.value %></td>
                 <% end %>
               </tr>

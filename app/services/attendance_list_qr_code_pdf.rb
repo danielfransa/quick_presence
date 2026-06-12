@@ -1,3 +1,7 @@
+require "prawn"
+require "prawn-svg"
+require "rqrcode"
+
 class AttendanceListQrCodePdf
   def initialize(attendance_list, public_url)
     @attendance_list = attendance_list

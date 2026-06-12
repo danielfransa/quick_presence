@@ -19,7 +19,7 @@
             </div>
           <% end %>
 
-          <% @attendance_list.attendance_fields.ordered.each do |field| %>
+          <% @fields.each do |field| %>
             <div class="mb-3">
               <%= label_tag "answers_#{field.id}", field.label, class: "form-label" %>
               <%= text_field_tag "answers[#{field.id}]", params.dig(:answers, field.id.to_s), required: field.required?, class: "form-control" %>

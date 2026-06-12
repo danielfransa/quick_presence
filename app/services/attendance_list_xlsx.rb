@@ -1,4 +1,5 @@
 require "cgi"
+require "nokogiri"
 require "zip"
 
 class AttendanceListXlsx

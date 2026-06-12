@@ -4,7 +4,7 @@ class AttendanceList < ApplicationRecord
   belongs_to :user
 
   has_many :attendance_fields, -> { ordered }, dependent: :destroy, inverse_of: :attendance_list
-  has_many :attendance_responses, dependent: :destroy
+  has_many :attendance_responses, dependent: :destroy, inverse_of: :attendance_list
 
   accepts_nested_attributes_for :attendance_fields,
     allow_destroy: true,
@@ -83,7 +83,7 @@ class AttendanceList < ApplicationRecord
   def purge_expired_responses!
     return 0 unless responses_retention_expired?
 
-    attendance_responses.destroy_all.size
+    AttendanceResponsesPurger.call(self.class.where(id: id))
   end
 
   private

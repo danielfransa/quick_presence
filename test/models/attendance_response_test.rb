@@ -1,6 +1,17 @@
 require "test_helper"
 
 class AttendanceResponseTest < ActiveSupport::TestCase
+  test "maintains the attendance list response counter" do
+    attendance_list = attendance_lists(:open_list)
+
+    assert_difference -> { attendance_list.reload.attendance_responses_count }, 1 do
+      attendance_list.attendance_responses.create!(
+        ip_address: "127.0.0.2",
+        user_agent: "Rails test"
+      )
+    end
+  end
+
   test "sets submitted_at on create" do
     response = attendance_lists(:open_list).attendance_responses.create!
 

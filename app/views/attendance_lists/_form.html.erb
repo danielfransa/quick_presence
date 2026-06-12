@@ -99,17 +99,3 @@
     <%= link_to t("common.actions.cancel"), attendance_lists_path, class: "btn btn-outline-secondary" %>
   </div>
 <% end %>
-
-<script>
-  (() => {
-    const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
-    const field = document.querySelector("[data-time-zone-field]");
-    const label = document.querySelector("[data-time-zone-label]");
-
-    if (!timeZone || !field) return;
-
-    field.value = timeZone;
-
-    if (label) label.textContent = timeZone;
-  })();
-</script>

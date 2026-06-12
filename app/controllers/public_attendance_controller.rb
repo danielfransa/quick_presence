@@ -8,6 +8,7 @@ class PublicAttendanceController < ApplicationController
     end
 
     @attendance_response = @attendance_list.attendance_responses.new
+    load_fields
   end
 
   def create
@@ -22,6 +23,7 @@ class PublicAttendanceController < ApplicationController
       user_agent: request.user_agent
     )
 
+    load_fields
     build_answers
 
     if @attendance_response.save
@@ -41,11 +43,15 @@ class PublicAttendanceController < ApplicationController
   def build_answers
     answers = params.fetch(:answers, {})
 
-    @attendance_list.attendance_fields.ordered.each do |field|
+    @fields.each do |field|
       @attendance_response.attendance_answers.build(
         attendance_field: field,
         value: answers[field.id.to_s]
       )
     end
+  end
+
+  def load_fields
+    @fields = @attendance_list.attendance_fields.load
   end
 end

@@ -1,10 +1,7 @@
-require "csv"
-require "prawn"
-require "prawn-svg"
-
 class AttendanceListsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_attendance_list, only: %i[show edit update destroy responses export qr_code_pdf close]
+  before_action :load_fields, only: %i[show responses]
 
   def index
     @attendance_lists = current_user.attendance_lists.order(created_at: :desc)
@@ -51,38 +48,22 @@ class AttendanceListsController < ApplicationController
     @attendance_list.purge_expired_responses!
 
     @responses = @attendance_list.attendance_responses
-      .includes(attendance_answers: :attendance_field)
-      .order(submitted_at: :desc)
+      .with_answers
+      .reverse_chronological
   end
 
   def export
     @attendance_list.purge_expired_responses!
-
-    fields = @attendance_list.attendance_fields.ordered
-    responses = @attendance_list.attendance_responses
-      .includes(attendance_answers: :attendance_field)
-      .order(:submitted_at, :id)
-    rows = [
-      [ t("exports.attendance_list.columns.number") ] +
-        fields.map(&:label) +
-        [ t("exports.attendance_list.columns.timestamp") ]
-    ]
-
-    responses.each_with_index do |response, index|
-      answers_by_field_id = response.attendance_answers.index_by(&:attendance_field_id)
-      rows << [ index + 1 ] +
-        fields.map { |field| answers_by_field_id[field.id]&.value } +
-        [ response.submitted_at.strftime(t("exports.attendance_list.timestamp_format")) ]
-    end
+    export = AttendanceListExport.new(@attendance_list)
 
     respond_to do |format|
       format.csv do
-        send_data CSV.generate { |csv| rows.each { |row| csv << row } },
+        send_data export.to_csv,
           filename: t("exports.attendance_list.filenames.csv", id: @attendance_list.id),
           type: "text/csv"
       end
       format.xlsx do
-        send_data AttendanceListXlsx.new(rows).render,
+        send_data export.to_xlsx,
           filename: t("exports.attendance_list.filenames.xlsx", id: @attendance_list.id),
           type: AttendanceListXlsx::CONTENT_TYPE
       end
@@ -112,12 +93,17 @@ class AttendanceListsController < ApplicationController
     @attendance_list = current_user.attendance_lists.find(params[:id])
   end
 
+  def load_fields
+    @fields = @attendance_list.attendance_fields.load
+  end
+
   def build_missing_fields
-    current_fields_count = @attendance_list.attendance_fields.size
+    fields = @attendance_list.attendance_fields.load
+    current_fields_count = fields.size
     fields_to_build = [ 5 - current_fields_count, 0 ].max
 
     fields_to_build.times do |index|
-      @attendance_list.attendance_fields.build(position: current_fields_count + index)
+      fields.build(position: current_fields_count + index)
     end
   end
 

@@ -70,7 +70,7 @@
           <span class="badge text-bg-light"><%= t("attendance_lists.form.timestamp_automatic") %></span>
         </div>
         <div class="list-group list-group-flush">
-          <% @attendance_list.attendance_fields.ordered.each do |field| %>
+          <% @fields.each do |field| %>
             <div class="list-group-item d-flex justify-content-between align-items-center">
               <span class="fw-semibold"><%= field.label %></span>
               <span class="badge <%= field.required? ? "text-bg-primary" : "text-bg-secondary" %>">

@@ -25,16 +25,6 @@ class ApplicationController < ActionController::Base
   private
 
   def preferred_locale
-    accepts_portuguese_brazil? ? :"pt-BR" : I18n.default_locale
-  end
-
-  def accepts_portuguese_brazil?
-    request.headers["Accept-Language"].to_s.split(",").any? do |language_range|
-      language, *parameters = language_range.strip.split(";")
-      quality_parameter = parameters.find { |parameter| parameter.strip.start_with?("q=") }
-      quality = quality_parameter ? quality_parameter.split("=", 2).last.to_f : 1.0
-
-      language.casecmp("pt-BR").zero? && quality.positive?
-    end
+    BrowserLocale.resolve(request.headers["Accept-Language"])
   end
 end

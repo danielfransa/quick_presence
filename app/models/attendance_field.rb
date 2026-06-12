@@ -1,6 +1,6 @@
 class AttendanceField < ApplicationRecord
   belongs_to :attendance_list, inverse_of: :attendance_fields
-  has_many :attendance_answers, dependent: :destroy
+  has_many :attendance_answers, dependent: :destroy, inverse_of: :attendance_field
 
   FIELD_TYPES = %w[text].freeze
 
