@@ -88,8 +88,8 @@ bin/rails test
 
 ## Production With Docker
 
-Create the local environment file from the tracked model and fill in the
-production image and Rails master key:
+The production stack uses a prebuilt Rails image, persistent SQLite storage,
+and Caddy for automatic HTTPS. Create the local environment file:
 
 ```bash
 cp .env_model .env
@@ -112,14 +112,17 @@ docker compose -f compose.production.yml up -d
 SQLite databases and Active Storage uploads are stored in
 `/var/lib/quick_presence/storage` by default. This path is mounted at
 `/rails/storage` inside the container and is not replaced when the image or
-container changes.
+container changes. Caddy certificates are also persisted outside its container.
 
 To deploy a new version, update `APP_IMAGE` in `.env` and run the two Docker
 Compose commands again. Back up the host storage directory regularly, using a
 filesystem snapshot or stopping the application while copying it.
 
-Kamal uses the same host storage path from `config/deploy.yml` and loads
-`RAILS_MASTER_KEY` from the local `.env`.
+See [the Oracle production deployment guide](docs/production-oracle-deploy.md)
+for DNS, firewall, image architecture, HTTPS, updates, rollback, and backups.
+
+Project architecture, engineering rules, and accumulated lessons are documented
+in [the project guidelines](docs/project-guidelines.md).
 
 ## Open Source License
 

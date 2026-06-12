@@ -34,8 +34,5 @@
 # Ignore key files for decrypting credentials and more.
 /config/*.key
 
-# Ignore local project planning documents.
-/docs/
-
 /app/assets/builds/*
 !/app/assets/builds/.keep

@@ -6,8 +6,24 @@ services:
     environment:
       RAILS_ENV: production
       SOLID_QUEUE_IN_PUMA: "true"
-    ports:
-      - "${APP_PORT:-80}:80"
+    expose:
+      - "80"
     volumes:
       - "${APP_STORAGE_PATH:?Set APP_STORAGE_PATH in .env}:/rails/storage"
+    restart: unless-stopped
+
+  caddy:
+    image: caddy:2-alpine
+    env_file:
+      - .env
+    depends_on:
+      - web
+    ports:
+      - "80:80"
+      - "443:443"
+      - "443:443/udp"
+    volumes:
+      - "./Caddyfile:/etc/caddy/Caddyfile:ro"
+      - "${CADDY_DATA_PATH:?Set CADDY_DATA_PATH in .env}:/data"
+      - "${CADDY_CONFIG_PATH:?Set CADDY_CONFIG_PATH in .env}:/config"
     restart: unless-stopped

@@ -10,6 +10,10 @@ if [ -f "$project_root/.env" ]; then
 fi
 
 storage_path="${APP_STORAGE_PATH:-/var/lib/quick_presence/storage}"
+caddy_data_path="${CADDY_DATA_PATH:-/var/lib/quick_presence/caddy/data}"
+caddy_config_path="${CADDY_CONFIG_PATH:-/var/lib/quick_presence/caddy/config}"
 
 install -d -m 0750 -o 1000 -g 1000 "$storage_path"
+install -d -m 0750 "$caddy_data_path" "$caddy_config_path"
 printf 'Production storage ready at %s\n' "$storage_path"
+printf 'Caddy data ready at %s and %s\n' "$caddy_data_path" "$caddy_config_path"
