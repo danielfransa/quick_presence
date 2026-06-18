@@ -1,0 +1,22 @@
+en:
+  privacy:
+    show:
+      badge: "Privacy and storage"
+      title: "Privacy notice"
+      intro: "QuickPresence uses only the storage needed to provide authentication, security, attendance forms, and basic application delivery."
+      essential_storage:
+        title: "Essential storage"
+        description: "These items are necessary for the application to work and are not used for advertising or behavioral tracking:"
+        session: "Session cookies keep organizers signed in and protect account actions."
+        csrf: "Security tokens help prevent forged form submissions."
+        assets: "Browser cache may keep versioned stylesheets, JavaScript, images, and icons so pages load faster."
+        notice_acknowledgement: "A local browser flag remembers that this notice was acknowledged."
+      not_used:
+        title: "What we do not use"
+        description: "QuickPresence does not currently use analytics cookies, advertising pixels, behavioral profiling, or third-party marketing trackers."
+      attendance_data:
+        title: "Attendance data"
+        description: "Attendance answers are stored on the server for the attendance list and are retained according to the project retention rules."
+      changes:
+        title: "Future changes"
+        description: "If optional analytics, marketing, or other non-essential storage is added later, the project must request consent before enabling it."

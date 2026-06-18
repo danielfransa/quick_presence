@@ -1,0 +1,22 @@
+"pt-BR":
+  privacy:
+    show:
+      badge: "Privacidade e armazenamento"
+      title: "Aviso de privacidade"
+      intro: "O QuickPresence usa apenas o armazenamento necessário para oferecer autenticação, segurança, formulários de presença e funcionamento básico da aplicação."
+      essential_storage:
+        title: "Armazenamento essencial"
+        description: "Estes itens são necessários para a aplicação funcionar e não são usados para publicidade ou rastreamento comportamental:"
+        session: "Cookies de sessão mantêm organizadores autenticados e protegem ações da conta."
+        csrf: "Tokens de segurança ajudam a prevenir envios falsificados de formulários."
+        assets: "O cache do navegador pode guardar folhas de estilo, JavaScript, imagens e ícones versionados para acelerar o carregamento das páginas."
+        notice_acknowledgement: "Uma marca local no navegador lembra que este aviso foi reconhecido."
+      not_used:
+        title: "O que não usamos"
+        description: "O QuickPresence não usa atualmente cookies de análise, pixels de publicidade, perfilamento comportamental ou rastreadores de marketing de terceiros."
+      attendance_data:
+        title: "Dados de presença"
+        description: "As respostas de presença são armazenadas no servidor para a lista de presença e seguem as regras de retenção do projeto."
+      changes:
+        title: "Mudanças futuras"
+        description: "Se analytics opcionais, marketing ou outro armazenamento não essencial forem adicionados depois, o projeto deverá solicitar consentimento antes de ativá-los."

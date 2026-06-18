@@ -25,6 +25,12 @@
         new_list: "Nova lista"
         sign_in: "Entrar"
         sign_up: "Criar conta"
+      privacy_notice:
+        title: "Privacidade e armazenamento essencial"
+        description: "O QuickPresence usa apenas cookies e armazenamento essenciais para login, segurança, formulários de presença e para lembrar que você viu este aviso."
+        essential_only: "Não usamos analytics, pixels de publicidade ou cookies de rastreamento comportamental."
+        learn_more: "Saiba mais"
+        accept: "Entendi"
   date:
     month_names:
       - null

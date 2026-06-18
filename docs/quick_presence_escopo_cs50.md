@@ -352,7 +352,7 @@ Status atual:
 - `bin/dev` ajustado para usar `bundle exec foreman`;
 - README e licença em inglês;
 - licença MIT adicionada;
-- pasta `docs/` adicionada ao `.gitignore`.
+- pasta `docs/` versionada com regras, escopo, deploy e aprendizados.
 
 Instalar Devise:
 
@@ -1243,6 +1243,26 @@ Dados de saúde
 Dados financeiros
 ```
 
+Status atual:
+
+- o projeto não usa analytics, pixels de publicidade, cookies de marketing ou
+  perfilamento comportamental;
+- o projeto usa cookies de sessão e tokens de segurança necessários para login,
+  autenticação e proteção dos formulários;
+- assets versionados podem ser guardados no cache do navegador para melhorar
+  carregamento;
+- o aviso de privacidade pode guardar uma marca local no navegador apenas para
+  lembrar que o usuário já reconheceu o aviso;
+- a rota `/privacy` explica o uso de armazenamento essencial e o que não é
+  usado atualmente;
+- qualquer analytics, marketing, pixel, tracker ou armazenamento não essencial
+  deve ser opt-in e não pode carregar antes do consentimento do usuário.
+
+Observação operacional: Bootstrap ainda é carregado via CDN no layout atual. Ele
+não é usado como tracker, mas envolve requisição a um terceiro. Para uma postura
+mais conservadora de privacidade, preferir empacotar dependências de interface
+localmente em uma evolução futura.
+
 No README, incluir aviso:
 
 ```txt
@@ -1494,7 +1514,14 @@ QuickPresence is an open source web application built with Ruby on Rails and SQL
 
 ## Privacy Notice
 
-This project was created for educational purposes. When using it in real environments, collect only the data necessary for attendance control.
+This project was created for educational purposes. When using it in real
+environments, collect only the data necessary for attendance control.
+
+The application provides a `/privacy` page and a first-access notice explaining
+that QuickPresence currently uses only essential cookies and browser storage.
+Optional analytics, marketing, advertising pixels, behavioral profiling, or any
+other non-essential browser storage must be disabled by default and enabled only
+after clear user consent.
 ```
 
 ---

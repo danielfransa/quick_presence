@@ -227,6 +227,12 @@ Jobs devem:
 - `APP_DOMAIN` define o host permitido em produção;
 - somente Caddy expõe portas públicas; Rails permanece na rede interna;
 - não expor SQLite, consoles, debug ou endpoints administrativos;
+- o projeto deve informar o uso de cookies e armazenamento essenciais em
+  `/privacy`;
+- cookies, pixels, analytics ou armazenamento não essencial devem ser
+  desativados por padrão e carregados somente após consentimento claro;
+- o aviso de privacidade pode gravar apenas uma preferência local para lembrar
+  que o usuário já reconheceu o aviso;
 - não confiar em IDs, tokens, locale, timezone ou campos enviados pelo cliente
   sem validação;
 - evitar registrar respostas de presença e outros dados pessoais;

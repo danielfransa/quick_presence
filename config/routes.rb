@@ -11,6 +11,8 @@ Rails.application.routes.draw do
     root "home#index"
   end
 
+  get "/privacy", to: "privacy#show", as: :privacy
+
   resources :attendance_lists do
     member do
       get :responses

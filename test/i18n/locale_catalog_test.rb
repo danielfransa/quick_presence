@@ -23,6 +23,7 @@ class LocaleCatalogTest < ActiveSupport::TestCase
       devise
       exports
       home
+      privacy
       public_attendance
     ].each do |domain|
       assert I18n.exists?(domain, :en), "Missing English I18n domain: #{domain}"

@@ -23,6 +23,17 @@ Submitted responses are retained for download for 48 hours after the attendance 
 
 Organizer accounts use usernames instead of email addresses. Password recovery and password changes are not available in this version, so organizers should choose a strong password and store it safely.
 
+## Privacy
+
+QuickPresence currently uses only essential cookies and browser storage for
+login, CSRF protection, attendance forms, static asset caching, and remembering
+that the privacy notice was acknowledged. It does not use analytics cookies,
+advertising pixels, behavioral profiling, or marketing trackers.
+
+The privacy notice is available at `/privacy`. Any future analytics, marketing,
+or other non-essential storage must be disabled by default and loaded only after
+clear user consent.
+
 ## Project Status
 
 This repository is at the beginning of development. The first milestone is a Rails MVP focused on the core attendance workflow.

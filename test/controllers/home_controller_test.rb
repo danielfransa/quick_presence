@@ -6,5 +6,7 @@ class HomeControllerTest < ActionDispatch::IntegrationTest
 
     assert_response :success
     assert_includes response.body, I18n.t("app.name")
+    assert_includes response.body, I18n.t("layouts.application.privacy_notice.title")
+    assert_select "a[href='#{privacy_path}']"
   end
 end

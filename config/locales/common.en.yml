@@ -25,6 +25,12 @@ en:
         new_list: "New list"
         sign_in: "Sign in"
         sign_up: "Sign up"
+      privacy_notice:
+        title: "Privacy and essential storage"
+        description: "QuickPresence uses only essential cookies and browser storage for login, security, attendance forms, and remembering that you saw this notice."
+        essential_only: "We do not use analytics, advertising pixels, or behavioral tracking cookies."
+        learn_more: "Learn more"
+        accept: "I understand"
   date:
     formats:
       long: "%B %d, %Y"

@@ -69,6 +69,26 @@
       <%= yield %>
     </main>
 
+    <div class="modal fade" id="privacyNoticeModal" tabindex="-1" aria-labelledby="privacyNoticeModalTitle" aria-hidden="true" data-privacy-notice-modal>
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h2 class="modal-title h5" id="privacyNoticeModalTitle"><%= t("layouts.application.privacy_notice.title") %></h2>
+          </div>
+          <div class="modal-body">
+            <p><%= t("layouts.application.privacy_notice.description") %></p>
+            <p class="mb-0 small text-secondary"><%= t("layouts.application.privacy_notice.essential_only") %></p>
+          </div>
+          <div class="modal-footer">
+            <%= link_to t("layouts.application.privacy_notice.learn_more"), privacy_path, class: "btn btn-outline-secondary" %>
+            <button type="button" class="btn btn-primary" data-bs-dismiss="modal" data-privacy-notice-accept>
+              <%= t("layouts.application.privacy_notice.accept") %>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   </body>
 </html>

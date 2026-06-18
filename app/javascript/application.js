@@ -4,6 +4,10 @@ import "controllers"
 
 document.addEventListener("turbo:load", setBrowserTimeZone)
 document.addEventListener("click", copyPublicLink)
+document.addEventListener("turbo:load", showPrivacyNotice)
+document.addEventListener("click", acceptPrivacyNotice)
+
+const privacyNoticeStorageKey = "quick_presence_privacy_notice_acknowledged"
 
 function setBrowserTimeZone() {
   const field = document.querySelector("[data-time-zone-field]")
@@ -85,4 +89,31 @@ function showCopyFallback(container, source, status) {
   source.setSelectionRange(0, source.value.length)
   status.textContent = container.dataset.copyBlockedStatus
   status.className = "small mt-2 text-danger"
+}
+
+function showPrivacyNotice() {
+  const modalElement = document.querySelector("[data-privacy-notice-modal]")
+  if (!modalElement || privacyNoticeAcknowledged()) return
+  if (!window.bootstrap?.Modal) return
+
+  window.bootstrap.Modal.getOrCreateInstance(modalElement).show()
+}
+
+function acceptPrivacyNotice(event) {
+  const button = event.target.closest("[data-privacy-notice-accept]")
+  if (!button) return
+
+  try {
+    window.localStorage.setItem(privacyNoticeStorageKey, "true")
+  } catch {
+    // If localStorage is unavailable, the notice may appear again later.
+  }
+}
+
+function privacyNoticeAcknowledged() {
+  try {
+    return window.localStorage.getItem(privacyNoticeStorageKey) === "true"
+  } catch {
+    return false
+  }
 }
