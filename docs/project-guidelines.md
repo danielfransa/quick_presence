@@ -11,7 +11,7 @@ Em caso de conflito:
 2. o comportamento coberto por testes representa o contrato atual;
 3. este documento orienta novas implementações;
 4. o escopo do produto está em `docs/quick_presence_escopo_cs50.md`;
-5. o deploy está detalhado em `docs/production-oracle-deploy.md`.
+5. notas públicas de manutenção ficam em `docs/production-maintenance.md`.
 
 ## 1. Objetivos do projeto
 
@@ -315,7 +315,8 @@ docker volume prune
 docker system prune --volumes
 ```
 
-O procedimento completo está em `docs/production-oracle-deploy.md`.
+O procedimento completo de deploy operacional fica em documentação privada local
+e não deve expor detalhes sensíveis no repositório público.
 
 ## 12. SQLite
 

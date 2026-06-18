@@ -39,4 +39,5 @@
 
 # Ignore details about my deploy
 /docs/production-oracle-deploy.md
+/docs_en/production-oracle-deploy.md
 /bin/production-maintenance
