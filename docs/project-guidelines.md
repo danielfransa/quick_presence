@@ -302,6 +302,9 @@ Aprendizados obrigatórios:
 - DNS deve possuir um único registro `A` ativo para o domínio raiz;
 - `db:prepare` aplica migrations na inicialização do container Rails;
 - rollback de imagem não reverte migrations;
+- manutenção automática da VM deve rodar depois das rotinas recorrentes da
+  aplicação, com logs, backup antes de reiniciar containers e health check após
+  subir;
 - backups devem existir fora da VM.
 
 Não executar em produção sem compreender o efeito:

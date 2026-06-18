@@ -136,6 +136,8 @@ filesystem snapshot or stopping the application while copying it.
 
 See [the Oracle production deployment guide](docs/production-oracle-deploy.md)
 for DNS, firewall, image architecture, HTTPS, updates, rollback, and backups.
+The private daily maintenance routine is documented in
+[production maintenance notes](docs/production-maintenance.md).
 
 Project architecture, engineering rules, and accumulated lessons are documented
 in [the project guidelines](docs/project-guidelines.md).
