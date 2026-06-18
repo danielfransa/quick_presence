@@ -3,6 +3,11 @@ en:
     notices:
       closed: "This attendance list is closed."
       recorded: "Attendance was recorded successfully."
+    confirmed:
+      badge: "Attendance recorded"
+      title: "Thank you"
+      description: "Your attendance for %{title} has been recorded."
+      return_home: "Return to home"
     show:
       badge: "Open for responses"
       privacy_notice: "The information you submit will be used only for this attendance list."

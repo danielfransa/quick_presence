@@ -211,6 +211,8 @@ Jobs devem:
 - `pt-BR` deve manter paridade de chaves com inglês;
 - novos textos exigem atualização dos dois catálogos;
 - formulários devem manter labels, mensagens de erro e estados acessíveis;
+- envios públicos bem-sucedidos devem redirecionar para uma página final de
+  confirmação, sem renderizar novamente o formulário vazio;
 - JavaScript deve melhorar a experiência, não impedir o fluxo básico;
 - links públicos e QR Codes devem usar URLs absolutas derivadas do host e
   protocolo corretos;

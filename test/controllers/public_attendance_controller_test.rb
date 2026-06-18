@@ -25,7 +25,16 @@ class PublicAttendanceControllerTest < ActionDispatch::IntegrationTest
       }
     end
 
-    assert_redirected_to public_attendance_url(attendance_lists(:open_list).public_token)
+    assert_redirected_to public_attendance_confirmation_url(attendance_lists(:open_list).public_token)
+  end
+
+  test "shows confirmation after a response is recorded" do
+    get public_attendance_confirmation_url(attendance_lists(:open_list).public_token)
+
+    assert_response :success
+    assert_includes response.body, I18n.t("public_attendance.confirmed.title")
+    assert_includes response.body, I18n.t("public_attendance.confirmed.return_home")
+    assert_select "form", count: 0
   end
 
   test "does not record a response for a closed list" do

@@ -14,7 +14,8 @@ class PublicAttendanceController < ApplicationController
   def create
     unless @attendance_list.open?
       redirect_to public_attendance_path(@attendance_list.public_token),
-        alert: t("public_attendance.notices.closed")
+        alert: t("public_attendance.notices.closed"),
+        status: :see_other
       return
     end
 
@@ -27,11 +28,15 @@ class PublicAttendanceController < ApplicationController
     build_answers
 
     if @attendance_response.save
-      redirect_to public_attendance_path(@attendance_list.public_token),
-        notice: t("public_attendance.notices.recorded")
+      redirect_to public_attendance_confirmation_path(@attendance_list.public_token),
+        notice: t("public_attendance.notices.recorded"),
+        status: :see_other
     else
       render :show, status: :unprocessable_entity
     end
+  end
+
+  def confirmed
   end
 
   private

@@ -3,6 +3,11 @@
     notices:
       closed: "Esta lista de presença está fechada."
       recorded: "Presença registrada com sucesso."
+    confirmed:
+      badge: "Presença registrada"
+      title: "Obrigado"
+      description: "Sua presença em %{title} foi registrada."
+      return_home: "Voltar ao início"
     show:
       badge: "Aberta para respostas"
       privacy_notice: "As informações enviadas serão usadas apenas nesta lista de presença."

@@ -131,8 +131,10 @@ https://seudominio.com/a/abc123
 7. O sistema gera um QR Code apontando para esse link.
 8. Os alunos acessam o QR Code e preenchem o formulário.
 9. O sistema grava as respostas com timestamp fixo.
-10. Após o fim da validade, o formulário não aceita mais respostas.
-11. O professor baixa um CSV com os dados.
+10. Após o envio, o participante vê uma página final de confirmação, sem voltar
+    para o formulário em branco.
+11. Após o fim da validade, o formulário não aceita mais respostas.
+12. O professor baixa um CSV com os dados.
 
 Exemplo de CSV:
 
@@ -655,6 +657,7 @@ Rails.application.routes.draw do
 
   get "/a/:public_token", to: "public_attendance#show", as: :public_attendance
   post "/a/:public_token", to: "public_attendance#create"
+  get "/a/:public_token/confirmed", to: "public_attendance#confirmed", as: :public_attendance_confirmation
 end
 ```
 
@@ -854,11 +857,15 @@ class PublicAttendanceController < ApplicationController
     build_answers
 
     if @attendance_response.save
-      redirect_to public_attendance_path(@attendance_list.public_token),
-        notice: "Presença registrada com sucesso."
+      redirect_to public_attendance_confirmation_path(@attendance_list.public_token),
+        notice: "Presença registrada com sucesso.",
+        status: :see_other
     else
       render :show, status: :unprocessable_entity
     end
+  end
+
+  def confirmed
   end
 
   private
@@ -1020,6 +1027,30 @@ Exemplo:
   <%= submit_tag "Registrar presença", class: "btn btn-primary" %>
 <% end %>
 ```
+
+---
+
+## 25.1 View de confirmação pública
+
+Depois de salvar uma resposta com sucesso, o participante deve ser redirecionado
+para uma página final de confirmação:
+
+```txt
+/a/:public_token/confirmed
+```
+
+Essa página não deve exibir o formulário novamente. Ela deve informar que a
+presença foi registrada e oferecer um caminho claro para voltar ao início da
+aplicação.
+
+Arquivo:
+
+```txt
+app/views/public_attendance/confirmed.html.erb
+```
+
+Motivo da regra: voltar ao formulário vazio após um envio bem-sucedido pode
+confundir o participante e levá-lo a preencher a presença novamente.
 
 ---
 
