@@ -89,7 +89,9 @@ bin/rails test
 ## Production With Docker
 
 The production stack uses a prebuilt Rails image, persistent SQLite storage,
-and Caddy for automatic HTTPS. Create the local environment file:
+and Caddy for automatic HTTPS. The image is built on the development machine
+and pulled by the small Oracle VM; production does not build Rails locally.
+Create the local environment file:
 
 ```bash
 cp .env_model .env
@@ -109,6 +111,9 @@ docker compose -f compose.production.yml pull
 docker compose -f compose.production.yml up -d
 ```
 
+The validated server setup uses Oracle `VM.Standard.E2.1.Micro` with Ubuntu
+Minimal, `linux/amd64`, 2 GB of swap, and deployment files in
+`~/quick_presence`.
 SQLite databases and Active Storage uploads are stored in
 `/var/lib/quick_presence/storage` by default. This path is mounted at
 `/rails/storage` inside the container and is not replaced when the image or

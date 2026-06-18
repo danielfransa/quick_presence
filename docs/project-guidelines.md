@@ -271,6 +271,15 @@ Aprendizados obrigatórios:
 - não construir a imagem Rails em VM com pouca memória;
 - criar a imagem em máquina adequada ou CI e publicar uma tag versionada;
 - confirmar a arquitetura da VM antes do build (`amd64` ou `arm64`);
+- o ambiente de produção validado atualmente usa Oracle
+  `VM.Standard.E2.1.Micro`, Ubuntu Minimal e imagem `linux/amd64`;
+- a `VM.Standard.E2.1.Micro` deve ter swap configurada, mas swap não substitui
+  memória suficiente para realizar builds;
+- domínios em produção devem apontar para um IP público reservado, não para um
+  endereço efêmero;
+- os arquivos operacionais ficam em `~/quick_presence`, enquanto dados
+  persistentes permanecem em `/var/lib/quick_presence`;
+- Docker Desktop no Windows precisa ter integração com a distribuição WSL;
 - não depender somente de `latest`;
 - o container é descartável, mas os dados não são;
 - SQLite e uploads ficam no host em
@@ -281,6 +290,8 @@ Aprendizados obrigatórios:
   estão corretos;
 - portas `80` e `443` precisam estar abertas na Oracle Cloud e na VM;
 - apenas o Caddy publica portas para a internet;
+- certificados devem ser testados pelo domínio, não pelo endereço IP;
+- DNS deve possuir um único registro `A` ativo para o domínio raiz;
 - `db:prepare` aplica migrations na inicialização do container Rails;
 - rollback de imagem não reverte migrations;
 - backups devem existir fora da VM.
