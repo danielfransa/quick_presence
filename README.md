@@ -1,5 +1,6 @@
 # QuickPresence
-#### Video Demo: <URL HERE>
+#### Video Demo En: <https://youtu.be/IvBiG2wLioc>
+#### Video Demo PT-Br: <https://youtu.be/jfYyVqANi0Y>
 #### Description:
 
 QuickPresence is a Ruby on Rails web application for creating temporary attendance lists that can be shared through a public link or QR Code. It was built as my CS50x final project to solve a practical problem I have seen in classes, meetings, workshops, and small events: organizers often need to collect attendance quickly, but they do not need a full survey platform or a system that requires every participant to create an account. QuickPresence lets an organizer create a list, choose the information that should be collected, define the time window in which responses are accepted, and then share a simple public form with participants.
