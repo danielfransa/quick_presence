@@ -67,7 +67,7 @@ end
 
 gem "devise", "~> 5.0"
 gem "rqrcode", "~> 3.2"
-gem "tailwindcss-rails", "~> 4.4"
+gem "tailwindcss-rails", "~> 4.6"
 
 gem "foreman", "~> 0.90.0", group: :development
 
